@@ -1,0 +1,7 @@
+.*
+!.gitignore
+!.github
+*.py[co]
+__pycache__/
+*.pyc 
+.idea

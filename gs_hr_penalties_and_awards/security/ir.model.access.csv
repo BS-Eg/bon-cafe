@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gs_penalties_awards_setting,gs_penalties_awards_setting,model_gs_penalties_awards_setting,,1,1,1,1
+access_gs_penalties_awards,gs_penalties_awards,model_gs_penalties_awards,,1,1,1,1
+access_gs_send_email_wizard,gs_send_email_wizard,model_gs_send_email_wizard,,1,1,1,1

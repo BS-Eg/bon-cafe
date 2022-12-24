@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+         <record id="employee_letter_type_view_tree_new" model="ir.ui.view">
+            <field name="name">letter.type.tree</field>
+            <field name="model">letter.type</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+           <record id="letter_type_view_form_new" model="ir.ui.view">
+            <field name="name">letter.type.form</field>
+            <field name="model">letter.type</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+
+                            </group>
+                            <group>
+                                   <field name="type"/>
+                            </group>
+
+                        </group>
+                        <notebook>
+                        <page name="description_page" string="Letter Template">
+                            <group colspan="4">
+                                <group>
+                                      <field name="employee_id"/>
+                                <field name="employee_salary"/>
+                                <field name="employee_number"/>
+                                </group>
+                                <group>
+                                     <field name="employee_position"/>
+                                     <field name="bank"/>
+                                <field name="company_id"/>
+                                </group>
+
+
+                            </group>
+                            <group>
+                                <field name="letter_template" type="html" options="{'collaborative': true}"/>
+
+                            </group>
+                        </page>
+                        </notebook>
+
+                    </sheet>
+                     <div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers" />
+						<field name="message_ids" widget="mail_thread" />
+					</div>
+
+
+                </form></field>
+           </record>
+
+
+          <record id="employee_type_letter_action" model="ir.actions.act_window">
+            <field name="name">Type Of Letter</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">letter.type</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+        <menuitem id="employee_letter_type_menu_new"
+                  name="Type Of Letter"
+                action="employee_type_letter_action"
+                  parent="hr.menu_human_resources_configuration"
+
+
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,69 @@
+.b_gmap_kisok_container{
+    margin-top: 10px;
+}
+.b_gmap_kisok_container h3{
+    padding:2px 2px 2px 2px;
+    color: #4c4c4c;
+}
+.b_gmap_kisok_view{
+    width: 100%;
+    height: 200px;
+    padding-top: 3px;
+    position: relative;
+    
+}
+.b_gmap_kisok_view span{
+    font-size: 13px;
+}
+.b_gmap_kisok_toggle{
+    width: 100%;
+    right: 20px;
+    color: #555555;
+    cursor: pointer;
+    border-top: 1px dashed #adb5bd;
+    border-bottom: 1px dashed #adb5bd;    
+    padding: 5px 5px 5px 5px;
+    background-color: #9e8b921f;
+}
+.b_gmap_kisok_toggle::before{
+    position: absolute;
+    right: 10px;
+}
+.b_gmap_clear_button{
+    background-color: white; 
+    margin-bottom: 5px;
+    padding: 1px 8px 2px 8px;
+} 
+
+
+.b_glocation_kisok_container{
+    margin-top: 10px;
+}
+.b_glocation_kisok_container h3{
+    padding:2px 2px 2px 2px;
+    color: #4c4c4c;
+}
+.b_glocation_kisok_view{
+    width: 100%;
+    height: 30px;
+    padding-top: 3px;
+    position: relative;
+    
+}
+.b_glocation_kisok_view span{
+    font-size: 13px;
+}
+.b_glocation_kisok_toggle{
+    width: 100%;
+    right: 20px;
+    color: #555555;
+    cursor: pointer;
+    border-top: 1px dashed #adb5bd;
+    border-bottom: 1px dashed #adb5bd;    
+    padding: 5px 5px 5px 5px;
+    background-color: #9e8b921f;
+}
+.b_glocation_kisok_toggle::before{
+    position: absolute;
+    right: 10px;
+}

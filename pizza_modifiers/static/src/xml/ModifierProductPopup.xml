@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ModifierProductPopup" owl="1">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-text popup-lg modifier-product-popup">
+                <header class="title">
+                    <t t-esc="props.title" />
+                </header>
+                <main class="col-lg-4 col-md-6 col-sm-12">
+                    <div style="margin:16px;">
+                        <t t-if="props.product.allow_portion">
+                            <div class="portion-modifier" data-portion_no="full" data-total_portion="full" data-label="Full Pizza">
+                                <div class="pos_modifier_scroll" style="display: flex;">
+                                    <t t-foreach="props.products" t-as="modifer">
+                                        <div class="product-list">
+                                            <h3 class="sub-heading">
+                                                <t t-esc="modifer.product.display_name" />
+                                            </h3>
+                                            <t t-foreach="modifer.attributes" t-as="attribute">
+                                                <t t-foreach="attribute.values" t-as="value">
+                                                    <t t-set="name" t-value="modifer.product.display_name + ' (' + value.name + ')'" />
+                                                    <article t-att-data-product-id="modifer.product.id" t-att-data-attribure-value-id="value.id" t-att-data-attribure-value-name="value.name" t-att-data-attribure-price-extra="value.price_extra" class="product" t-on-click="SelectExtraModifier">
+                                                        <div class="product-img">
+                                                            <img t-att-src="modifer.product.image_url" t-att-alt="name" />
+                                                            <span t-if="value.price_extra" class="price-tag">
+                                                                +
+                                                                <t t-esc="env.pos.format_currency(value.price_extra)" />
+                                                            </span>
+                                                        </div>
+                                                        <div class="product-name" style="font-weight: 400;font-size: 12px;">
+                                                            <t t-esc="name" />
+                                                        </div>
+                                                    </article>
+                                                </t>
+                                            </t>
+                                            <t t-if="!modifer.attributes.length">
+                                                <t t-set="name" t-value="modifer.product.display_name" />
+                                                <article t-att-data-product-id="modifer.product.id" class="product" t-on-click="SelectExtraModifier">
+                                                    <div class="product-img">
+                                                        <img t-att-src="modifer.product.image_url" t-att-alt="name" />
+                                                    </div>
+                                                    <div class="product-name" style="font-weight: 400;font-size: 12px;">
+                                                        <t t-esc="name" />
+                                                    </div>
+                                                </article>
+                                            </t>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="pos_modifier_cart">
+                                    <h4 class="title">
+                                        Cart
+                                    </h4>
+                                    <div class="modifer_cart_lines">
+                                        <h5>Cart is empty Please Add Modifer.</h5>
+                                    </div>
+                                </div>
+                                <t t-if="props.product.apply_selector">
+                                    <div class="modifer-slides-button">
+                                        <div class="modified-pizza-poration button highlight" t-on-click="SelectModifiedPizzaPoration">
+                                            <i class="fa fa-plus-circle" />
+                                        </div>
+                                    </div>
+                                </t>
+                                <div class='modifiers-by-portion oe_hidden'>
+                                    <div class="portion-choose">
+                                        <img src="/pizza_modifiers/static/src/img/full.png" usemap="#image-map-full" />
+                                        <map name="image-map-full">
+                                            <area title="Full Pizza" data-portion_no="full" data-total_portion="full" data-label="Full Pizza" coords="77,75,68" shape="circle" t-on-click="SelectPizzaPortionArea" />
+                                        </map>
+                                        <img src="/pizza_modifiers/static/src/img/2.png" usemap="#image-map-two"/>
+                                        <map name="image-map-two">
+                                            <area title="Left Half" t-att-data-portion_no="1" t-att-data-total_portion="2" data-label="Left Half" coords="78,8,78,142,56,138,35,126,19,107,13,83,11,56,23,38,33,24,57,11" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                            <area title="Right Half" t-att-data-portion_no="2" t-att-data-total_portion="2" data-label="Right Half" coords="80,143,79,10,108,16,129,32,141,55,145,81,138,105,119,127" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                        </map>
+                                        <img src="/pizza_modifiers/static/src/img/4.png" usemap="#image-map-four"/>
+                                        <map name="image-map-four">
+                                            <area title="1st Quater" t-att-data-portion_no="1" t-att-data-total_portion="4" data-label="1st Quater" coords="78,75,77,9,55,12,40,19,31,28,21,38,16,48,13,58,9,75" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                            <area title="2nd Quater" t-att-data-portion_no="2" t-att-data-total_portion="4" data-label="2nd Quater" coords="79,8,80,76,145,76,144,60,138,44,128,30,108,15" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                            <area title="3rd Quater" t-att-data-portion_no="3" t-att-data-total_portion="4" data-label="3rd Quater" coords="79,77,79,142,98,139,113,132,125,122,136,109,142,96,146,77" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                            <area title="4th Quater" t-att-data-portion_no="4" t-att-data-total_portion="4" data-label="4th Quater" coords="77,77,76,143,58,139,40,131,24,121,10,99,8,78" shape="poly" t-on-click="SelectPizzaPortionArea" />
+                                        </map>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <t t-foreach="props.products" t-as="modifer">
+                                <h3 class="sub-heading">
+                                    <t t-esc="modifer.product.display_name" />
+                                </h3>
+                                <div class="product-list">
+                                    <t t-foreach="modifer.attributes" t-as="attribute">
+                                        <t t-foreach="attribute.values" t-as="value">
+                                            <t t-set="name" t-value="modifer.product.display_name + ' (' + value.name + ')'" />
+                                            <article t-att-data-product-id="modifer.product.id" t-att-data-attribure-value-id="value.id" t-att-data-attribure-value-name="value.name" t-att-data-attribure-price-extra="value.price_extra" class="product" t-on-click="SelectExtraModifier">
+                                                <div class="product-img">
+                                                    <img t-att-src="modifer.product.image_url" t-att-alt="name" />
+                                                    <span t-if="value.price_extra" class="price-tag">
+                                                        +
+                                                        <t t-esc="env.pos.format_currency(value.price_extra)" />
+                                                    </span>
+                                                </div>
+                                                <div class="product-name" style="font-weight: 400;font-size: 12px;">
+                                                    <t t-esc="name" />
+                                                </div>
+                                            </article>
+                                        </t>
+                                    </t>
+                                    <t t-if="!modifer.attributes.length">
+                                        <t t-set="name" t-value="modifer.product.display_name" />
+                                        <article t-att-data-product-id="modifer.product.id" class="product" t-on-click="SelectExtraModifier">
+                                            <div class="product-img">
+                                                <img t-att-src="modifer.product.image_url" t-att-alt="name" />
+                                            </div>
+                                            <div class="product-name" style="font-weight: 400;font-size: 12px;">
+                                                <t t-esc="name" />
+                                            </div>
+                                        </article>
+                                    </t>
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </main>
+                <footer class="footer">
+                    <div class="button highlight confirm" t-on-click="confirm" style="margin-bottom: 10px;">
+                        Add Extra
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        Skip
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+    <t t-name="ModfierDisplayCartOrderLines">
+        <table style="width: 100%;border-spacing: 5px;border-collapse: initial;font-size: 12px;">
+            <tr>
+                <th>
+                    Item
+                </th>
+                <th>
+                    Size
+                </th>
+                <th>
+                    Portion
+                </th>
+                <th>
+                    Qty
+                </th>
+                <th>
+                    Price
+                </th>
+            </tr>
+            <t t-foreach="modifierslines" t-as="modifer">
+                <tr style="font-weight: 400;font-size: 12px;">
+                    <td>
+                        <t t-esc="modifer.product.display_name" />
+                    </td>
+                    <td>
+                        <t t-esc="modifer.attribute_value" />
+                    </td>
+                    <td>
+                        <t t-esc="modifer.portion_name" />
+                    </td>
+                    <td>
+                        <t t-esc="modifer.qty" />
+                    </td>
+                    <td>
+                        <t t-esc="modifer.price_extra" />
+                    </td>
+                </tr>
+            </t>
+        </table>
+    </t>
+</templates>

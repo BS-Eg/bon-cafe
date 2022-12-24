@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+            id="action_report_hr_attendance_sheet"
+            model="attendance.sheet"
+            string="Attendance Sheet Report"
+            report_type="qweb-pdf"
+            name="gs_att_sheet_report.attendance_sheet_report"
+            file="gs_att_sheet_report.attendance_sheet_report"
+            attachment_use="True"/>
+    />
+
+
+    <record id="paperformat_attendance_sheet" model="report.paperformat">
+        <field name="name">attendance sheet</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">297</field>
+        <field name="page_width">210</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">15</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">110</field>
+    </record>
+
+    <record id="action_report_hr_attendance_sheet" model="ir.actions.report">
+        <field name="paperformat_id" ref="gs_att_sheet_report.paperformat_attendance_sheet"/>
+    </record>
+
+
+
+
+
+</odoo>

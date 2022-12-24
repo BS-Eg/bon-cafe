@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+   
+    <t t-name="ClientListScreen" t-inherit="point_of_sale.ClientListScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('searchbox-client')]" position="replace">
+                <!-- replace search customer place holder to only search -->
+                <div t-if="!state.detailIsShown" class="searchbox-client top-content-center">
+                    <input placeholder="Search" size="1" t-on-keyup="updateClientList" />
+                    <span class="search-clear-client"></span>
+                </div>
+        </xpath>   
+    </t>
+</templates>

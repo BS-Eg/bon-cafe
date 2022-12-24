@@ -1,0 +1,100 @@
+<odoo>
+    <record id="view_gs_notification_search" model="ir.ui.view">
+       <field name="name">gs.notification.view.search</field>
+       <field name="model">gs.notification</field>
+        <field name="arch" type="xml">
+            <search string="Notification Search">
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="group_by_type_of_notification" string="Type Of Notification" domain="[]" context="{'group_by' : 'type_of_notification'}"/>
+                    <filter name="group_by_employee_id" string="Employee" domain="[]" context="{'group_by' : 'employee_id'}"/>
+                    <filter name="group_by_partner_id" string="Partner" domain="[]" context="{'group_by' : 'partner_id'}"/>
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by' : 'state'}"/>
+                </group>
+        </search>
+       </field>
+    </record>
+
+    <record id="gs_notification_view_tree" model="ir.ui.view">
+        <field name="name">gs.notification.view.tree</field>
+        <field name="model">gs.notification</field>
+        <field name="arch" type="xml">
+            <tree delete="false">
+                <field name="type_of_notification"/>
+                <field name="employee_id" attrs="{'invisible': [('type_of_notification','=','contract_management')]}"/>
+                <field name="partner_id"  attrs="{'invisible': [('type_of_notification','!=','contract_management')]}"/>
+                <field name="date"/>
+                <field name="days_to_renew"/>
+                <field name="notify_ids" widget="many2many_tags"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_notification_view_form" model="ir.ui.view">
+        <field name="name">gs.notification.view.form</field>
+        <field name="model">gs.notification</field>
+        <field name="arch" type="xml">
+            <form delete="false">
+                <header>
+                    <button name="action_processing" type="object" string="Process" states="new" class="oe_highlight"/>
+                    <button name="action_done" type="object" string="Done" states="processing" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" states="new,processing,done" />
+                    <field name="state" widget="statusbar" statusbar_visible="new,processing,done"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group>
+                            <field name="type_of_notification"/>
+                            <field name="employee_id" attrs="{'invisible': [('type_of_notification','=','contract_management')]}"/>
+                            <field name="partner_id"  attrs="{'invisible': [('type_of_notification','!=','contract_management')]}"/>
+                        </group>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="date"/>
+                            <field name="days_to_renew"/>
+                            <field name="notify_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="notifi_minutes" invisible="1"/>
+                            <field name="notifi_hours" invisible="1"/>
+                            <field name="notifi_day" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="email_minutes" invisible="1"/>
+                            <field name="email_hours" invisible="1"/>
+                            <field name="email_day" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="recipient_users" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+               </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_notification_action" model="ir.actions.act_window">
+        <field name="name">Notification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.notification</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_gs_notification" name="Notification"  web_icon="gs_notification,static/description/icon_notif.png"  sequence="0"/>
+    <menuitem id="sub_menu_gs_notification" name="Notification"  parent="gs_notification.menu_gs_notification" sequence="1"/>
+    <menuitem id="sub_sub_gs_notification" name="Notification"  parent="gs_notification.sub_menu_gs_notification" action="gs_notification_action" sequence="1"/>
+
+</odoo>

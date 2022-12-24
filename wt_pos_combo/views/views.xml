@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_combo_form" model="ir.ui.view">
+        <field name="name">pos.combo.form</field>
+        <field name="model">pos.combo</field>
+        <field name="arch" type="xml">
+            <form string="POS Combo">
+                <sheet name="pos_combo_form">
+                    <div class="oe_title">
+                        <label for="name" string="Combo Name"/>
+                        <h1>
+                            <div class="d-flex">
+                                <field class="o_text_overflow" name="name" placeholder="e.g. Drinks"/>
+                            </div>
+                        </h1>
+                    </div>
+                    <field name="pos_combo_items_ids">
+                        <tree editable="bottom">
+                            <field name="category_id"/>
+                            <field name="product_ids" widget="many2many_tags" domain="[('available_in_pos', '=', True), ('pos_categ_id', '=', category_id)]"/>
+                            <field name="is_min_max_config"/>
+                            <field name="min_qty" attrs="{'invisible': [('is_min_max_config', '!=', True)]}"/>
+                            <field name="max_qty" attrs="{'invisible': [('is_min_max_config', '!=', True)]}"/>
+                        </tree>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pos_combo_tree" model="ir.ui.view">
+        <field name="name">pos.combo.tree</field>
+        <field name="model">pos.combo</field>
+        <field name="arch" type="xml">
+            <tree string="POS Combo">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="pos_combo_action" model="ir.actions.act_window">
+        <field name="name">PoS Combo</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.combo</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Define a new Combo
+            </p><p>
+                Combo are used in combo products
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_pos_combo"
+        action="wt_pos_combo.pos_combo_action"
+        parent="point_of_sale.pos_menu_products_configuration"
+        sequence="2"/>
+
+    <record id="product_template_combo_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.combo.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <span class="d-inline-block">
+                    <field name="is_combo_product"/>
+                    <label for="is_combo_product"/>
+                </span>
+            </xpath>
+            <xpath expr="//notebook//page[@name='inventory']" position="after">
+                <page name="pos_combo" string="POS COMBO PACK" attrs="{'invisible': [('is_combo_product', '!=', True)]}">
+                    <group>
+                        <field name="pos_combo_id" attrs="{'required': [('is_combo_product', '!=', False)]}"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="combo_email_compose_message_wizard_form">
+        <field name="name">combo.items.wizard.form</field>
+        <field name="model">combo.items.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Combo Items">
+                    <field name="combo_ids" readonly="1">
+                        <tree create="false" delete="false">
+                        <field name="name"/>
+                        <field name="category_id"/>
+                        <field name="qty"/>
+                        <field name="price"/>
+                        <field name="total_price"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button string="Cancel" class="btn-default" special="cancel"/>   
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="view_pos_pos_form" model="ir.ui.view">
+        <field name="name">pos.order.form.combo</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[@name='products']//field[@name='lines']//tree//field[@name='full_product_name']" position="after">
+                <field name="is_combo" invisible="1"/>
+                <button name="open_combo_items" type="object" string="Show Toppings" attrs="{'invisible':[('is_combo', '!=', True)]}"/>
+                <field name="combo_items_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

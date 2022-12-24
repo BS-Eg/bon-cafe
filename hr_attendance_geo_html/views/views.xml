@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- <template id="assets_backend_hr_attendance_geo_html" name="hr_attendance_geo_html assets" inherit_id="web.assets_backend">
+        <xpath expr="//script[contains(@src, '/web/static/lib/jquery.scrollTo/jquery.scrollTo.js')]" position="before">
+              <link rel="stylesheet" href="/hr_attendance_geo_html/static/src/css/leaflet.css"/>
+              <link rel="stylesheet" href="/hr_attendance_geo_html/static/src/css/leaflet.fullscreen.css"/>
+              <script type="text/javascript" src="/hr_attendance_geo_html/static/src/js/lib/leaflet.js"></script>
+              <script type="text/javascript" src="/hr_attendance_geo_html/static/src/js/lib/leaflet-geoip.js"></script>
+              <script type="text/javascript" src="/hr_attendance_geo_html/static/src/js/lib/leaflet.fullscreen.js"></script>
+        </xpath>
+        <xpath expr="." position="inside">
+              <link rel="stylesheet" href="/hr_attendance_geo_html/static/src/css/geo.css" />
+              <script type="text/javascript" src="/hr_attendance_geo_html/static/src/js/geo_html_attendance.js"></script>
+        </xpath>
+    </template> -->
+
+    <record id="view_attendance_tree_geo_html" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.geo.html</field>
+        <field name="model">hr.attendance</field>
+        <field name="priority" eval="97"/>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='check_out']" position="after">
+             <field name="geo_access_check_in" class="hr-attendance-base-width"/>
+             <field name="geo_access_check_out" class="hr-attendance-base-width"/>
+          </xpath>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_form_geo_html" model="ir.ui.view">
+        <field name="name">hr.attendance.form.geo.html</field>
+        <field name="model">hr.attendance</field>
+        <field name="priority" eval="96"/>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//group[3]/group[1]/group[1]" position="inside">
+            <field name="geo_access_check_in"/>
+          </xpath>
+          <xpath expr="//group[3]/group[2]/group[1]" position="inside">
+            <field name="geo_access_check_out"/>
+          </xpath>
+          <xpath expr="//group[3]/group[1]/group[2]" position="inside">
+             <field name="geo_check_in"/>
+             <field name="map_url_check_in"/> 
+          </xpath>
+          <xpath expr="//group[3]/group[2]/group[2]" position="inside">
+             <field name="geo_check_out"/>
+             <field name="map_url_check_out"/>
+          </xpath>
+        </field>
+    </record>
+
+  </data>
+</odoo>

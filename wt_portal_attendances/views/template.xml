@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="portal_layout" inherit_id="portal.portal_layout" name="Attendance Button">
+		<xpath expr="//div[@id='wrap']//t[@t-if='my_details']//div[@id='o_my_sidebar']" position="inside">
+			<div class="o_portal_my_attendance_login_logout mt16" t-if="user_id.has_group('base.group_portal') and  user_id.employee_id">
+				<h4>Attendance</h4>
+                <hr class="mt-1 mb-2"/>
+				<a class="dk_attendance_checkin_checkout btn btn-primary" href="/portal/attendance/check_in_check_out">
+					CheckIn / CheckOut
+				</a>
+				<a class="dk_attendance_checkin_checkout btn btn-primary" href="/take/leave">
+					Time Off
+				</a>
+			</div>
+		</xpath>
+	</template>
+</odoo>

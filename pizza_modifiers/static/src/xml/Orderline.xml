@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//ul[hasclass('info-list')]" position="attributes">
+            <attribute name="t-if">!props.line.parent_line_id</attribute>
+        </xpath>
+        <xpath expr="//span[hasclass('product-name')]" position="inside">
+            <t t-if="props.line.parent_line_id">
+                <t t-if="props.line.portion">
+                    (
+                    <t t-esc="props.line.portion" />)
+                </t>
+                <em>
+                    <t t-esc="props.line.get_quantity_str()" />
+                </em>
+                <span> </span>
+                <t t-esc="props.line.get_unit().name" />
+            </t>
+        </xpath>
+    </t>
+</templates>

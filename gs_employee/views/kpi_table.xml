@@ -1,0 +1,58 @@
+<odoo>
+
+    <record id="gs_kpi_table_view_tree" model="ir.ui.view">
+        <field name="name">gs.kpi.table.view.tree</field>
+        <field name="model">gs.kpi.table</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="task_id"/>
+                <field name="job_id"/>
+                <field name="point"/>
+                <field name="percentage"/>
+                <field name="evaluated_by_ids" widget="many2many_tags"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_kpi_table_view_form" model="ir.ui.view">
+        <field name="name">gs.kpi.table.view.form</field>
+        <field name="model">gs.kpi.table</field>
+        <field name="arch" type="xml">
+            <form>
+<!--                <header>
+                    <button name="get_percentage" string="Get Percentage" type="object"/>
+                </header>-->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="task_id"/>
+                            <field name="job_id"/>
+                            <field name="point"/>
+                        </group>
+                        <group>
+                            <field name="percentage" readonly="1"/>
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+               </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_kpi_table_action" model="ir.actions.act_window">
+        <field name="name">KPI Table</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.kpi.table</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sub_gs_kpi_table" name="KPI Table"  parent="gs_hr_insurance.gs_hr_settings_main_menu" action="gs_kpi_table_action" sequence="32"/>
+
+
+</odoo>

@@ -1,0 +1,125 @@
+<odoo>
+    <record id="view_gs_penalties_awards_search" model="ir.ui.view">
+       <field name="name">gs.penalties.awards.view.search</field>
+       <field name="model">gs.penalties.awards</field>
+        <field name="arch" type="xml">
+            <search string="Payment Collections Search">
+                <field name="sequence_penalties_awards"/>
+                <separator/>
+                    <filter name="to_approve" string="To Approve" domain="[('state', '=', 'submit')]"/>
+                <separator/>
+                <filter string="Today" name="today_date"
+                    domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d')),('date','&lt;',(context_today()+relativedelta(days=1)).strftime('%%Y-%%m-%%d'))]"/>
+                <filter string="This Week" name="this_week"
+                        domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-%%d')),('date','&lt;',(context_today()+relativedelta(days=1,weekday=0)).strftime('%%Y-%%m-%d'))]"/>
+                <filter string="This Month" name="last_month"
+                        domain="[('date','&gt;=',context_today().strftime('%%Y-%%m-01')),('date','&lt;',(context_today()+relativedelta(months=1)).strftime('%%Y-%%m-01'))]"/>
+                <filter string="This Year" name="year" domain="[('date','&lt;=', time.strftime('%%Y-12-31')),('date','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <separator/>
+                <filter name="deduction" string="Deduction" domain="[('type', '=', 'deduction')]"/>
+                <filter name="award" string="Award" domain="[('type', '=', 'award')]"/>
+
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="group_by_type" string="Type" domain="[]" context="{'group_by' : 'type'}"/>
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by' : 'state'}"/>
+                    <filter name="group_by_employee" string="Employee" domain="[]" context="{'group_by' : 'employee_id'}"/>
+                </group>
+        </search>
+       </field>
+    </record>
+    
+    <record id="gs_penalties_awards_view_tree" model="ir.ui.view">
+        <field name="name">gs.penalties.awards.view.tree</field>
+        <field name="model">gs.penalties.awards</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence_penalties_awards"/>
+                <field name="date"/>
+                <field name="dedication_month"/>
+                <field name="type"/>
+                <field name="employee_id"/>
+                <field name="number_of_days"/>
+                <field name="penalties_awards_id"/>
+                <field name="amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_penalties_awards_view_form" model="ir.ui.view">
+        <field name="name">gs.penalties.awards.view.form</field>
+        <field name="model">gs.penalties.awards</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_submit" type="object" string="Submit" states="draft" class="oe_highlight"/>
+                    <button name="action_approve" type="object" string="Approve" states="submit" class="oe_highlight"/>
+                    <button name="action_refuse" type="object" string="Refuse" states="submit" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': [('state', '=', 'cancel')]}"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset To Draft" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                    <button name="%(action_send_email_wizard)d" string="Send By Email" type="action"
+                                attrs="{'invisible': ['|',('is_send_by_email', '=', True),('state', '!=', 'approve')]}" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve"/>
+                </header>
+                <sheet>
+                    <h1><field name="sequence_penalties_awards" readonly="1"/></h1>
+                    <group>
+                        <group style="width:50%">
+                            <div>
+                                <label for="date"/>
+                                <br/>
+                                <field nolabel="1" name="date" required="1"/>
+                            </div>
+                        </group>
+                        <group style="width:50%">
+                            <div>
+                                <label for="employee_id"/>
+                                <br/>
+                                <field nolabel="1" name="employee_id" required="1"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="type"/>
+                            <field name="penalties_awards_id" options="{'no_create': True, 'no_edit': True}" />
+                            <field name="is_type_fixed" invisible="1"/>
+                            <field name="number_of_days" attrs="{'invisible': [('is_type_fixed', '=', True)]}"/>
+                            <field name="amount"/>
+                        </group>
+                        <group>
+                            <field name="note"/>
+                            <field name="dedication_month"/>
+                            <field name="is_attachment"/>
+                            <field name="recipient_users" invisible="1"/>
+                            <field name="user_id" invisible="1"/>
+                            <field name="is_send_by_email" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Attachment" attrs="{'invisible': [('is_attachment', '=', False)]}">
+                            <field name="attachment_ids" widget="pdf_viewer"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_penalties_awards_action" model="ir.actions.act_window">
+        <field name="name">Penalties &amp; Awards</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.penalties.awards</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_gs_penalties_awards" name="Penalties &amp; Awards" parent="gs_hr_insurance.gs_hr_main_menu" sequence="16"/>
+    <menuitem id="sub_gs_penalties_awards" name="Penalties &amp; Awards"  parent="menu_gs_penalties_awards" action="gs_penalties_awards_action" sequence="1"/>
+
+</odoo>

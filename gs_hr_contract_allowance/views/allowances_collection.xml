@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="allowances_collect_tree" model="ir.ui.view">
+            <field name="name">allowances.collect.tree</field>
+            <field name="model">allowances.collect</field>
+            <field name="arch" type="xml">
+                <tree  create="false" delete="false" string="Allowances Collect">
+<!--                    <field name="allowance_type"/>-->
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="allowances_collect_form" model="ir.ui.view">
+            <field name="name">allowances.collect.form</field>
+            <field name="model">allowances.collect</field>
+            <field name="arch" type="xml">
+               <form  create="false" delete="false" edit="false" string="Allowances Collect">
+                   <sheet>
+                       <group>
+                           <group>
+<!--                                <field name="allowance_type"/>-->
+                                <field name="name"/>
+                           </group>
+                           <group/>
+                       </group>
+                   </sheet>
+                   <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                   </div>
+               </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_allowances_collection">
+            <field name="name">Allowances Collect</field>
+            <field name="res_model">allowances.collect</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_no_content_create">
+                    Create new record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="allowances_collection_menu" name="Allowances Collect" parent="gs_hr_insurance.gs_hr_settings_main_menu"
+                  action="action_view_allowances_collection"/>
+    </data>
+</odoo>

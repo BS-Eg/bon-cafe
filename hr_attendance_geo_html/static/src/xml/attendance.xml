@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <t t-name="HrAttendanceGeoMap">
+        <!-- <button id="openDiv" class="open-div-geo">show map</button> -->
+        <div id="mapid" style="margin-top:50px;display:none;"></div>
+    </t>
+    <t t-extend="HrAttendanceMyMainMenu">
+        <t t-jquery="h3:first" t-operation="after">
+            <t t-if="widget.geo_enable">
+                <t t-if="widget.geo_access">
+                    <span class="round-tab" style="border: 2px solid green;"  id="state-geo">
+                        <i class="fa fa-check" style="color:green" id="icon-geo"></i>
+                    </span>
+                    <h3 id="geo-access" style="color:green"> GEO-access 
+                        <i id="geo-icon" class="fa fa-angle-double-down fa-2x hr-attendance-base-down-icon"></i></h3>
+                    <div style="display:none" id="geo-info">
+                        <h5 class="mt8 mb24">Geolocation: 
+                            <span id='latitude'>
+                                <t t-esc="widget.latitude"/>
+                            </span>
+                            <span id='longitude'>
+                                <t t-esc="widget.longitude"/>
+                            </span>
+                        </h5>
+                        <t t-call="HrAttendanceGeoMap"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <span class="round-tab" style="border: 2px solid #f27474;" id="state-geo">
+                        <i class="fa fa-times hr-attendance-base-denied" id="icon-geo"></i>
+                    </span>
+                    <h3 id="geo-access" class="hr-attendance-base-denied"> GEO-access 
+                        <i id="geo-icon" class="fa fa-angle-double-down fa-2x hr-attendance-base-down-icon"></i></h3>
+                    <div style="display:none" id="geo-info">
+                        <h5 class="mt8 mb24">Geolocation: 
+                            <span id='latitude'>
+                                <t t-esc="widget.latitude"/>
+                            </span>
+                            <span id='longitude'>
+                                <t t-esc="widget.longitude"/>
+                            </span>
+                        </h5>
+                        <t t-call="HrAttendanceGeoMap"/>
+                    </div>
+                </t>
+            </t>
+            <t t-else="">
+                <t t-if="widget.geo_access">
+                    <span class="round-tab" style="border: 2px solid #555555;" id="state-geo">
+                        <i class="fa fa-check" id="icon-geo"></i>
+                    </span>
+                    <h3 id="geo-access"> GEO-access (disable)
+                        <i id="geo-icon" class="fa fa-angle-double-down fa-2x hr-attendance-base-down-icon"></i></h3>
+                    <div style="display:none" id="geo-info">
+                        <h5 class="mt8 mb24">Geolocation: 
+                            <span id='latitude'>
+                                <t t-esc="widget.latitude"/>
+                            </span>
+                            <span id='longitude'>
+                                <t t-esc="widget.longitude"/>
+                            </span>
+                        </h5>
+                        <t t-call="HrAttendanceGeoMap"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <span class="round-tab" style="border: 2px solid #555555;" id="state-geo">
+                        <i class="fa fa-times" id="icon-geo"></i>
+                    </span>
+                    <h3 id="geo-access"> GEO-access (disable)
+                        <i id="geo-icon" class="fa fa-angle-double-down fa-2x hr-attendance-base-down-icon"></i></h3>
+                    <div style="display:none" id="geo-info">
+                        <h5 class="mt8 mb24">Please enable geolocation in configuration HR attendance
+                        </h5>
+                        <t t-call="HrAttendanceGeoMap"/>
+                    </div>
+                </t>
+            </t>
+            <hr align="center" width="100%" size="1" color="#adb5bd" />
+        </t>
+    </t>
+</template>

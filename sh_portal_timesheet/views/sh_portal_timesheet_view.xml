@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="sh_portal_timehsheet_list_view" inherit_id="hr_timesheet.portal_my_timesheets">
+    	<xpath expr="//t[@t-call='portal.portal_searchbar']//t[1]" position="after">
+    		<div class="form-inline ml-lg-4">
+                <a id="create_timesheet" class="btn btn-success btn-sm" name="create_timesheet" title="Create Timesheet" aria-label="Create Timesheet" role="button"><i class="fa fa-plus" /> Create Timesheet</a>
+            </div>
+    	</xpath>
+    	<xpath expr="//t[@t-foreach='grouped_timesheets']//thead//th[last()]" position="after">
+    		<th>Actions</th>
+    	</xpath>
+    	<xpath expr="//t[@t-foreach='grouped_timesheets']//tbody//t[1]//td[last()]" position="after">
+    		<td class="text-right"><input type="hidden" id="timesheet_id" name="timesheet_id" t-att-value="timesheet.id"/><button id="delete_timesheet_from_list" name="delete_timesheet_from_list" class="btn btn-secondary"><i align="right" class="fa fa-trash"/></button>&amp;nbsp;<button id="edit_timesheet" name="edit_timesheet" style="cursor: pointer;" class="btn btn-success"><i align="right" class="fa fa-pencil"/></button></td>
+    	</xpath>
+    	<xpath expr="//t[@t-foreach='timesheets']" position="inside">
+			<div id="deleteModal" class="modal fade" role="dialog">
+  				<div class="modal-dialog">
+				<!-- Modal content-->
+					<div class="modal-content">
+						  <div class="modal-header">
+						  	<h4 class="modal-title">Delete a Timesheet</h4>
+						    <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+						  </div>
+						  <div class="modal-body">
+		        		  	<div class="col-md-12">
+		        		  		<h2>Are you want to delete a timehseet ?</h2>
+		        		  	</div>
+		        		  	<input type="hidden" class="form-control o_website_form_input" id="delete_timesheet_id" name="delete_timesheet_id" value="delete_timesheet_id"/>
+						  <div class="modal-footer">
+						  	<button id="delete_timesheet" class="btn btn-secondary" name="delete_timesheet">OK</button>
+						    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+					</div>
+				  </div>
+			</div>
+			</div>
+			<div id="ModalEdit" class="modal fade" role="dialog">
+  				<div class="modal-dialog">
+				<!-- Modal content-->
+					<div class="modal-content">
+						  <div class="modal-header">
+						  	<h4 class="modal-title">Edit a Timesheet</h4>
+						    <button type="button" class="close" data-dismiss="modal">&amp;times;</button>
+						  </div>
+						  <div class="modal-body">
+						  	<div id="edit_success_msg_div" class="o_hidden">
+					        	<p id="edit_success_msg" class="alert alert-success" value="edit_success_msg"></p>
+		        		  	</div>
+						  	<div class="col-md-12">
+							    <div class="form-group row form-field o_website_form_required_custom">
+			                       <label class="col-form-label" for="edit_description">Description</label>
+			                       <input type="text" class="form-control o_website_form_input" id="edit_description" name="edit_description" required="" t-att-value="timesheet.name"/>
+			                   	</div>
+		                   	</div>
+		                   	<div class="col-md-12">
+			                   	<div class="form-group row form-field o_website_form_required_custom">
+			                       <label class="col-form-label" for="edit_date">Date</label>
+			                       <input type="date" class="form-control o_website_form_input" id="edit_date" name="edit_date" required="" t-att-value="timesheet.date"/>
+			                   	</div>
+			                </div>
+			                <div class="col-md-12">
+			                   	<div class="form-group row form-field o_website_form_required_custom">
+			                       <label class="col-form-label" for="edit_project_id">Project</label>
+			                       <select id="edit_project_id" class="form-control dropdown-toggle">
+		                           		<t t-foreach="request.env['project.project'].sudo().search([])" t-as="project">
+		                           			<t t-if="timesheet.project_id and timesheet.project_id.id == project.id">
+												<option t-att-value="project.id" t-att-selected="True"><t t-esc="project.name"/></option>		                           				
+		                           			</t>
+		                           			<t t-else="">
+		                           				<option t-att-value="project.id"><t t-esc="project.name"/></option>
+		                           			</t>
+										</t>
+	                      			</select>
+			                   	</div>
+		                   	</div>
+		                   	<div class="col-md-12">
+			                   	<div class="form-group row form-field">
+			                       <label class="col-form-label" for="edit_task_id">Task</label>
+			                       <select id="edit_task_id" class="form-control dropdown-toggle">
+		                           		<t t-foreach="request.env['project.task'].sudo().search([])" t-as="task">
+		                           			<t t-if="timesheet.task_id and timesheet.task_id.id == task.id">
+		                           				<option t-att-value="task.id" t-att-selected="True"><t t-esc="task.name"/></option>
+		                           			</t>
+		                           			<t t-else="">
+												<option t-att-value="task.id"><t t-esc="task.name"/></option>		                           			
+		                           			</t>
+										</t>
+	                      			</select>
+			                   	</div>
+			                </div>
+			                <div class="col-md-12">
+			                   	<div class="form-group row form-field o_website_form_required_custom">
+			                       <label class="col-form-label" for="edit_employee_id">Employee</label>
+			                       <select id="edit_employee_id" class="form-control dropdown-toggle">
+		                           		<t t-foreach="request.env['hr.employee'].sudo().search([])" t-as="employee">
+		                           			<t t-if="timesheet.employee_id and timesheet.employee_id.id == employee.id">
+		                           				<option t-att-value="employee.id" t-att-selected="True"><t t-esc="employee.name"/></option>
+		                           			</t>
+		                           			<t t-else="">
+		                           				<option t-att-value="employee.id"><t t-esc="employee.name"/></option>
+		                           			</t>
+										</t>
+                      				</select>
+			                   	</div>
+		                   	</div>
+		                   	<div class="col-md-4">
+			                   	<div class="form-group row form-field">
+			                       <label class="col-form-label" for="edit_duration">Duration</label>
+			                       <input type="time" class="form-control o_website_form_input" id="edit_duration" name="edit_duration" value="edit_duration" required="" />
+			                   	</div>
+			                </div>
+						  </div>
+						  <input type="hidden" class="form-control o_website_form_input" id="edit_timesheet_id" name="edit_timesheet_id" value="edit_timesheet_id"/>
+						  <div class="modal-footer">
+						  	<button id="save_timesheet" class="btn btn-secondary" name="save_timesheet">Save</button>
+						    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+					</div>
+				
+				  </div>
+			</div>
+    	</xpath>
+    </template>
+</odoo>

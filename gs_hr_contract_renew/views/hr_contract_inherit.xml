@@ -1,0 +1,47 @@
+<odoo>
+  <data>
+
+    <record id="hr_contract_view_form" model="ir.ui.view">
+        <field name="name">hr.contract.view.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(action_set_renew_wizard)d" type="action" string="SET RENEW" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="attributes">
+                <attribute name="required">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_end']" position="after">
+                <field name="renew_date" required="0"/>
+                <field name="notice_period" required="0"/>
+                <field name="is_expire" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='employee_id']" position="before">
+                <field name="contract_serial_number" readonly="1"/>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Renew Tab" name="contract_renew_page">
+                    <group class="col-2">
+                    </group>
+                    <group name="contract_renew_info" class="col-8">
+                        <field name="renew_date_ids" nolabel="1" readonly="0">
+                          <tree editable="bottom">
+                            <field name="sequence"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                            <field name="contract_period" readonly="1"/>
+                          </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_attendance_admin_geospatial,hr.attendance.user.ip,model_hr_attendance_geospatial,hr_attendance_base.group_hr_attendance_admin_pro,1,1,1,1
+access_hr_attendance_manager_geospatial,hr.attendance.system.user.ip,model_hr_attendance_geospatial,hr_attendance_base.group_hr_attendance_manager_pro,1,1,1,1
+access_hr_attendance_user_geospatial,hr.attendance.system.user.ip,model_hr_attendance_geospatial,hr_attendance_base.group_hr_attendance_user_pro,1,0,0,0
+access_hr_attendance_all_geospatial,hr.attendance.system.user.ip,model_hr_attendance_geospatial,,1,0,0,0

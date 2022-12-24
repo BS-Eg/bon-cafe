@@ -1,0 +1,122 @@
+<odoo>
+    <data>
+        <template id="report_pdf_letter_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <th t-call="web.external_layout">
+                        <t t-set="o" t-value="o.with_context({'lang':'en_US'})"/>
+                        <div class="page" >
+
+                           <table width="100%" >
+                                <thead>
+                                    <tr>
+
+                                          <td align="left">
+
+                                            <strong style="font-size:16px; ">
+                                              Letter :
+                                            </strong>
+                                        </td>
+
+                                        <td align="left"
+                                            style="">
+                                            <span t-field="o.type_id.name" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                          <td align="left"
+                                            style="text-align:left;">
+                                            <strong style="font-size:16px; ">
+                                               Date:
+                                            </strong>
+                                        </td>
+
+                                        <td align="left">
+                                            <span t-field="o.date" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                    </tr>
+                                     <tr>
+
+                                          <td align="left">
+
+                                            <strong style="font-size:16px; ">
+                                              Employee :
+                                            </strong>
+                                        </td>
+
+                                        <td align="left"
+                                            style="">
+                                            <span t-field="o.employee_id" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                          <td align="left"
+                                            style="text-align:left;">
+                                            <strong style="font-size:16px; ">
+                                               Employee Salary:
+                                            </strong>
+                                        </td>
+
+                                        <td align="left">
+                                            <span t-field="o.employee_salary" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                    </tr>
+                                     <tr>
+
+                                          <td align="left">
+
+                                            <strong style="font-size:16px; ">
+                                            Employee ID :
+                                            </strong>
+                                        </td>
+
+                                        <td align="left"
+                                            style="">
+                                            <span t-field="o.employee_number" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                          <td align="left"
+                                            style="text-align:left;">
+                                            <strong style="font-size:16px; ">
+                                               Employee Job:
+                                            </strong>
+                                        </td>
+
+                                        <td align="left">
+                                            <span t-field="o.employee_position" style="text-align:left;font-size:14px;"/>
+                                        </td>
+
+
+
+                                    </tr>
+
+                                </thead></table>
+                            <br/>
+                            <u>
+                                <div>
+                                    Template
+                                </div>
+                            </u>
+                             <div>
+                            <span t-field="o.letter_template"/>
+                             </div>
+
+
+                        </div>
+                    </th>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

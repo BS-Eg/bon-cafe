@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="assets" inherit_id="point_of_sale.assets">
+      <xpath expr="." position="inside">
+          <script type="text/javascript" src="/custom_pos_discount/static/src/js/CustomDiscountButton.js"></script>
+          <script type="text/javascript" src="/custom_pos_discount/static/src/js/custommodels.js"></script>
+      </xpath>
+    </template>-->
+
+    <record id="custom_pos_discount.custom_pos_discount1" model="ir.asset">
+        <field name="name">custom_pos_discount1</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos_discount/static/src/js/CustomDiscountButton.js</field>
+    </record>
+    <record id="custom_pos_discount.custom_pos_discount2" model="ir.asset">
+        <field name="name">custom_pos_discount2</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos_discount/static/src/js/custommodels.js</field>
+    </record>
+</odoo>

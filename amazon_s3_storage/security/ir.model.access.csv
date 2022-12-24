@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_s3_config_config,odoo_s3_config.s3_config.s3.config.public,model_s3_config,,1,1,1,1

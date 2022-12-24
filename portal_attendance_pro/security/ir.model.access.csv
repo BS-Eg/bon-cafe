@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_attendance_public_user,access.hr.attendance.public.user,hr_attendance.model_hr_attendance,base.group_portal,1,0,0,0
+access_hr_employee_public_public_user,access.hr.employee.public.public.user,hr.model_hr_employee_public,base.group_portal,1,0,0,0
+access_hr_attendance_public_user,access.hr.attendance.public.user,hr_attendance.model_hr_attendance,base.group_portal,1,1,1,0
+access_hr_attendance_geofence_user,access.hr.attendance.geofence.user,model_hr_attendance_geofence,base.group_user,1,1,1,1
+access_hr_attendance_geofence_portal_user,access.hr.attendance.geofence.portal.user,model_hr_attendance_geofence,base.group_portal,1,1,1,1

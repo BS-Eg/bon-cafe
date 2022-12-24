@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- <template id="assets_backend_hr_attendance_geospatial" name="hr_attendance_geospatial assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+              <script type="text/javascript" src="/hr_attendance_geospatial/static/src/js/attendances_geospatial.js"></script>
+        </xpath>
+    </template> -->
+
+    <record id="view_tree_geospatial" model="ir.ui.view">
+        <field name="name">tree.geospatial</field>
+        <field name="model">hr.attendance.geospatial</field>
+        <field name="arch" type="xml">
+          <tree string="GEO table">
+             <field name="name"/>
+             <field name="description"/>
+             <field name="company_id"/>
+           </tree>
+        </field>
+    </record>
+
+    <record id="view_form_geospatial" model="ir.ui.view">
+        <field name="name">form.geospatial</field>
+        <field name="model">hr.attendance.geospatial</field>
+        <field name="arch" type="xml">
+          <form string="GEO table">
+            <sheet>
+                <group>
+                  <field name="name"/>
+                  <field name="description"/>
+                  <field name="company_id"/>
+                  <field name="employee_ids" widget="many2many_tags"/>
+                </group>
+                <notebook>
+                  <page string="The polygon">
+                    <field name="the_geom2" widget="geo_edit_map"/>
+                  </page>
+                </notebook>
+            </sheet>
+          </form>
+        </field>
+    </record>
+
+
+    <record id="ir_ui_view_retailmachineview0" model="ir.ui.view">
+      <field name="name">HR attendance geospatial</field>
+      <field name="arch" type="xml">
+        <geoengine>
+          <field name="name" select="1"/>
+          <field name="the_geom2"/>
+        </geoengine>
+      </field>
+      <field eval="16" name="priority"/>
+      <field name="model">hr.attendance.geospatial</field>
+    </record>
+
+<record id="geoengine_vector_layer_retailmachinebasicline0" model="geoengine.vector.layer">
+  <field name="geo_field_id" ref="field_hr_attendance_geospatial__the_geom2"/>
+  <field name="name">Retail Machine Basic Line</field>
+  <field eval="6" name="sequence"/>
+  <field name="view_id" ref="ir_ui_view_retailmachineview0"/>
+  <field name="geo_repr">basic</field>
+  <field eval="1" name="nb_class"/>
+  <field name="begin_color">#FF680A</field>
+</record>
+<record id="geoengine_raster_layer_retailmachineosm" model="geoengine.raster.layer">
+  <field name="raster_type">osm</field>
+  <field name="name">Retail Machine Open Street Map</field>
+  <field name="view_id" ref="ir_ui_view_retailmachineview0"/>
+  <field eval="0" name="overlay"/>
+</record>
+<record id="geoengine_raster_layer_basic0" model="geoengine.raster.layer">
+  <field name="raster_type">d_wms</field>
+  <field name="name">basic</field>
+  <field name="url">vmap0.tiles.osgeo.org/wms/vmap0</field>
+  <field name="view_id" ref="ir_ui_view_retailmachineview0"/>
+  <field eval="1" name="overlay"/>
+</record>
+
+    <record id="hr_attendance_action_geospatial" model="ir.actions.act_window">
+        <field name="name">Geospatial table</field>
+        <field name="res_model">hr.attendance.geospatial</field>
+        <field name="view_mode">tree,form,geoengine</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+              No geospatial polygon found
+            </p>
+            <p>
+              The geospatial of your company will be displayed here.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_hr_attendance_view_geospatial_table" 
+              name="Geospatial table" 
+              parent="hr_attendance.menu_hr_attendance_root" 
+              sequence="50" 
+              groups="hr_attendance_base.group_hr_attendance_admin_pro" 
+              action="hr_attendance_action_geospatial"/>
+
+    <!-- inherit attendance-->
+    <record id="view_attendance_tree_geospatial" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.geospatial</field>
+        <field name="model">hr.attendance</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='check_out']" position="after">
+             <field name="geospatial_access_check_in" class="hr-attendance-base-width"/>
+             <field name="geospatial_access_check_out" class="hr-attendance-base-width"/>
+          </xpath>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_form_geospatial" model="ir.ui.view">
+        <field name="name">hr.attendance.form.geospatial</field>
+        <field name="model">hr.attendance</field>
+        <field name="priority" eval="97"/>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//group[3]/group[1]/group[1]" position="inside">
+            <field name="geospatial_access_check_in"/>
+          </xpath>
+          <xpath expr="//group[3]/group[2]/group[1]" position="inside">
+            <field name="geospatial_access_check_out"/>
+          </xpath>
+          <xpath expr="//group[3]/group[1]/group[3]" position="inside">
+            <field name="geospatial_check_in_id"/>
+          </xpath>
+          <xpath expr="//group[3]/group[2]/group[3]" position="inside">
+            <field name="geospatial_check_out_id"/>
+          </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

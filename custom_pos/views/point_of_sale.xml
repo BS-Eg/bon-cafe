@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <template id="custom_assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">           
+
+            <script type="text/javascript" src="/custom_pos/static/src/js/db.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/pos.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/Loyalty.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/ClientListScreen.js"></script>
+            &lt;!&ndash; <script type="text/javascript" src="/custom_pos/static/src/js/PaymentScreen.js"></script> &ndash;&gt;
+            <script type="text/javascript" src="/custom_pos/static/src/js/PaymentScreen_new.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/ProductScreen.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/NumberBuffer.js"></script>
+            <script type="text/javascript" src="/custom_pos/static/src/js/NumberPopupTourMethods.js"></script>
+
+        </xpath>
+    </template>-->
+
+    <record id="custom_pos.custom_pos1" model="ir.asset">
+        <field name="name">custom_pos1</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/db.js</field>
+    </record>
+    <record id="custom_pos.custom_pos2" model="ir.asset">
+        <field name="name">custom_pos2</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/pos.js</field>
+    </record>
+    <record id="custom_pos.custom_pos3" model="ir.asset">
+        <field name="name">custom_pos3</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/Loyalty.js</field>
+    </record>
+    <record id="custom_pos.custom_pos4" model="ir.asset">
+        <field name="name">custom_pos4</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/ClientListScreen.js</field>
+    </record>
+    <record id="custom_pos.custom_pos5" model="ir.asset">
+        <field name="name">custom_pos5</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/PaymentScreen_new.js</field>
+    </record>
+    <record id="custom_pos.custom_pos6" model="ir.asset">
+        <field name="name">custom_pos6</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/ProductScreen.js</field>
+    </record>
+    <record id="custom_pos.custom_pos7" model="ir.asset">
+        <field name="name">custom_pos7</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/NumberBuffer.js</field>
+    </record>
+    <record id="custom_pos.custom_pos8" model="ir.asset">
+        <field name="name">custom_pos8</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/custom_pos/static/src/js/NumberPopupTourMethods.js</field>
+    </record>
+</odoo>

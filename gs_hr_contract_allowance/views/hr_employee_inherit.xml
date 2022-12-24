@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="gs_hr_contract_employee_inherit_form_view" model="ir.ui.view" >
+            <field name="name">hr.employee.form.inherit.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='public']" position="after">
+                    <page string="Salary Information" name="salary_information">
+<!--
+                        <button name="action_get_data" string="Compute" class="btn-primary" type="object"/>
+-->
+                        <group>
+                            <group string="Paid Salary Information">
+                                <field name="run_compute" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="wage" readonly="1"/>
+                                <field name="house_allowance_val" readonly="1"/>
+                                <field name="trans_allowance_val" readonly="1"/>
+                                <field name="other_allowance" readonly="1"/>
+                                <field name="total_paid" readonly="1"/>
+                            </group>
+                            <group string="Provisions Accrued">
+                                <field name="eos_total_amount" readonly="1"/>
+                                <field name="eos_total_amount_month" readonly="1"/>
+                                <field name="vacation_total_amount" readonly="1"/>
+                                <field name="ticket_base_amount" readonly="1"/>
+
+                                <label for="no_of_tickets"/>
+                                <div class="o_row" name="no_of_tickets">
+                                    <field name="no_of_tickets" readonly="1" force_save="True" nolabel="1"/>
+                                    <span>/ Unit</span>
+                                </div>
+
+                                <label for="annual_time_off_accrued"/>
+                                <div class="o_row" name="annual_time_off_accrued">
+                                    <field name="annual_time_off_accrued" readonly="1" force_save="True" nolabel="1"/>
+                                    <span>/ Days</span>
+                                </div>
+
+                                <field name="medical_insurance_cost" readonly="1"/>
+                            </group>
+                            <group string="Deduction">
+                                <field name="employee_gosi_saudi" readonly="1"/>
+                                <separator/>
+                                <field name="net_salary"/>
+                            </group>
+
+                            <group string="unpaid provisions">
+                                <field name="vacation_premium"/>
+                                <field name="eos_premium"/>
+                                <field name="ticket_premium"/>
+                                <field name="iqama_renew_premium"/>
+                                <field name="medical_insurance"/>
+                                <field name="gosi_company_share"/>
+                                <separator/>
+                                <field name="total_unpaid"/>
+                                <field name="total_monthly_cost"/>
+                            </group>
+
+                            <separator string="Allowances"/>
+                            <field name="contract_allowances">
+                                <tree editable="bottom">
+                                    <field name="allowance_id" readonly="1"/>
+                                    <field name="amount" readonly="1"/>
+                                    <field name="is_paid" readonly="1"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="gs_hr_contract_employee_inherit_tree_view" model="ir.ui.view" >
+            <field name="name">hr.employee.form.inherit.view</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='coach_id']" position="after">
+                    <field name="wage" optional="hide"/>
+                    <field name="house_allowance_val" optional="hide"/>
+                    <field name="trans_allowance_val" optional="hide"/>
+                    <field name="other_allowance" optional="hide"/>
+                    <field name="total_paid" optional="hide"/>
+                    <field name="eos_total_amount" optional="hide"/>
+                    <field name="vacation_total_amount" optional="hide"/>
+                    <field name="ticket_base_amount" optional="hide"/>
+                    <field name="no_of_tickets" optional="hide"/>
+                    <field name="annual_time_off_accrued" optional="hide"/>
+                    <field name="medical_insurance_cost" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

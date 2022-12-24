@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="entitlement_time_off" model="hr.leave.type">
+            <field name="name">Entitlement Time Off</field>
+    <!--        <field name="allocation_type">fixed</field>
+            <field name="color_name">black</field>
+            <field name="validity_start" eval="False"/>-->
+            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+    </data>
+</odoo>

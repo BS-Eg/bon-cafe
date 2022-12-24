@@ -1,0 +1,55 @@
+<odoo>
+
+    <record id="gs_alarm_view_tree" model="ir.ui.view">
+        <field name="name">gs.alarm.view.tree</field>
+        <field name="model">gs.alarm</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="alarm_type"/>
+                <field name="duration"/>
+                <field name="interval"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_alarm_view_form" model="ir.ui.view">
+        <field name="name">gs.alarm.view.form</field>
+        <field name="model">gs.alarm</field>
+        <field name="arch" type="xml">
+            <form string="Calendar Alarm">
+                <sheet>
+                     <group>
+                        <group>
+                            <field name="name" invisible="1"/>
+                            <field name="alarm_type"/>
+                        </group>
+                        <group>
+                            <label for="duration"/>
+                            <div class="o_row">
+                                <field name="duration"/>
+                                <field name="interval"/>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_alarm_action" model="ir.actions.act_window">
+        <field name="name">Alarm</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.alarm</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sub_menu_gs_notif_configuration" name="Configuration"  parent="gs_notification.menu_gs_notification" sequence="100"/>
+    <menuitem id="sub_sub_gs_alarm" name="Alarm"  parent="gs_notification.sub_menu_gs_notif_configuration" action="gs_alarm_action" sequence="1"/>
+
+</odoo>

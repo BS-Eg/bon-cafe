@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="amazonS3_view_general_configuration" model="ir.ui.view">
+     <field name="name">res.config.settings.inherit.amazonS3.signup</field>
+     <field name="model">res.config.settings</field>
+     <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+     <field name="arch" type="xml">
+       <div id="companies" position="after">
+         <h2>Amazon S3 Cloud Configuration</h2>
+           <div class="row mt16 o_settings_container">
+             <div class="col-xs-12 col-md-6 o_setting_box" id="domain_setting">
+               <div class="o_setting_right_pane">
+                 <field name="s3_config_id" invisible="1" />
+                 <div name="Amazon S3 Configuration">
+                     <b>Amazon S3 Configuration</b>
+                     <button type="object" name="open_s3_conf" string="Configuration" class="oe_inline oe_link" icon="fa-cogs"/>
+                 </div>
+               </div>
+             </div>
+         </div>
+       </div>
+     </field>
+ </record>
+
+
+
+
+  <record id="amazon_s3_config_view_form" model="ir.ui.view">
+        <field name="name">s3.config.form</field>
+        <field name="model">s3.config</field>
+        <field name="arch" type="xml">
+            <form string="Amazon S3 Configuration" create="false" delete="false">
+                <sheet>
+                    <div class="oe_title">
+                        <div class="oe_edit_only">
+                            <label for="name" string="Title:"/>
+                        </div>
+                        <h1>
+                            <field name="name" default_focus="1" placeholder="Name"/>
+
+                        </h1>
+                    </div>
+
+                    <group>
+                      <group>
+                        <field name="amazonS3secretkey"/>
+                        <field name="amazonS3accessKeyId"/>
+                        <field name="amazonS3bucket_name"/>
+                        <field name="bucket_location" placeholder="eg : ap-south-1"/>
+                        <field name="s3_location_constraint" invisible="1"/>
+                        <field name="is_store"/>
+
+
+                      </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

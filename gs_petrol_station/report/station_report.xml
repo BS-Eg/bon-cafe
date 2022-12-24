@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="report.paperformat" id="paperformat_report">
+            <field name="name">paperformat.report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="station_report_action" model="ir.actions.report">
+            <field name="name">Station Report</field>
+            <field name="model">gs.pump</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">gs_petrol_station.station_report</field>
+            <field name="binding_model_id" ref="model_gs_pump"/>
+            <field name="paperformat_id" ref="paperformat_report"/>
+        </record>
+
+        <template id="station_report">
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <div style="border-bottom: 3px solid black">
+                            <div>
+                                <h2 class="text-center">Station</h2>
+                            </div>
+                            <br></br>
+                            <br/>
+                            <style>
+                                table {
+                                font-family: arial, sans-serif;
+                                border-collapse: collapse;
+                                width: 100%;
+                                }
+                                tr:nth-child(even) {
+                                background-color: #eee;
+                                }
+                                tr:nth-child(odd) {
+                                background-color: #fff;
+                                }
+                            </style>
+                            <table style="border-collapse: collapse;border: 2px solid #ddd;font-size:14px; width:100%;padding-top:0;margin-top:0">
+                                <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;">
+                                    <th class="text-center" style="background-color:#D3D3D3;padding: 8px;border: 2px solid #ddd;text-align: center;width: 10%">
+                                        Station
+                                    </th>
+                                    <td class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 14%" colspan="3"
+                                        t-esc="station_id"/>
+                                </tr>
+                            </table>
+                            <br></br>
+                            <br></br>
+                            <h3 class="text-center" style="background-color:#D3D3D3; color:black;">Details</h3>
+                            <table style="border-collapse: collapse;border: 2px solid #ddd;font-size:14px; width:100%;padding-top:0;margin-top:0">
+                                <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;">
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Pump</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Pump Type</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Nozzle Petrol</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Opening</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Ending</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">Sales</th>
+                                    <th class="text-center" style="background-color:#D3D3D3; color:black;">User</th>
+                                </tr>
+                                <tr t-foreach="docs1" t-as="doc1">
+                                    <td>
+                                        <span t-esc="doc1['pump']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['type_pump_id']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['nozzle_petrol_id']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['opening_pump']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['ending_pump']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['sales']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="doc1['user_id']" />
+                                    </td>
+                                </tr>
+                            </table>
+                            <br></br>
+                            <br></br>
+
+                            <div id="total" class="row">
+                                <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-2 col-md-1'}">
+                                    <table class="table table-sm;page-break-inside: avoid;" style=" border:0;">
+                                        <tr class="" style=" border:0;">
+                                            <td colspan="2" style="text-align:center">
+                                                <strong> Petrol 91 بنزين</strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="" style=" border:0;">
+                                            <td>
+                                                <strong>Total Opening</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="sum_petrol_91"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-2 col-md-1'}">
+                                    <table class="table table-sm;page-break-inside: avoid;" style=" border:0;">
+                                        <tr class="" style=" border:0;">
+                                            <td colspan="2" style="text-align:center">
+                                                <strong> Petrol 95 بنزين</strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="" style=" border:0;">
+                                            <td>
+                                                <strong>Total Opening</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="sum_petrol_95"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-2 col-md-1'}">
+                                    <table class="table table-sm;page-break-inside: avoid;" style=" border:0;">
+                                        <tr class="" style=" border:0;">
+                                            <td colspan="2" style="text-align:center">
+                                                <strong> Diesel ديزل </strong>
+                                            </td>
+                                        </tr>
+                                        <tr class="" style=" border:0;">
+                                            <td>
+                                                <strong>Total Opening</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="sum_petrol_diesel"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

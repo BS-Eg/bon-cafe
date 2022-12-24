@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="inherit_report_saledetails" inherit_id="point_of_sale.report_saledetails">
+            <xpath expr="//div[@class='page']" position="replace">
+                <div class="page">
+
+                    <div class="text-center">
+                        <h2>Sales Details</h2>
+
+                        <strong><t t-esc="date_start" t-options="{'widget': 'datetime'}"/> - <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/></strong>
+                    </div>
+
+                    <!-- Orderlines -->
+                    <h3>Products</h3>
+                    <table  class="table table-sm table-bordered">
+                        <thead><tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price Unit</th>
+                            <th>Disc. Amount</th>
+                            <th>Total</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr t-foreach='products' t-as='line'>
+
+                            <t t-if="line['product_name']!='Loyalty Redeem Point'">
+
+                                <t t-set="internal_reference" t-value="line['code'] and '[%s] ' % line['code'] or ''" />
+                                <td><t t-esc="internal_reference" /><t t-esc="line['product_name']" /></td>
+                                <td>
+                                    <t t-esc="line['quantity']" />
+                                    <t t-if='line["uom"] != "Units"'>
+                                        <t t-esc='line["uom"]' /> 
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-esc='line["price_unit"]' />
+                                <t t-if='line["discount"] != 0'>
+                                    Disc: <t t-esc='line["discount"]' />%
+                                </t>
+                                </td>
+<!--                                line total before disc-->
+                                <t t-set="price_total_before_disc" t-value="line['price_unit'] * line['quantity']" />
+                                <t t-if="line['discount'] != 0" t-set="disc_amount" t-value="line['discount'] / 100 * price_total_before_disc" />
+                                <td>
+                                    <t t-if="line['discount'] != 0" t-esc="'%.2f' % disc_amount" />
+                                </td>
+<!--                                line total after disc-->
+                                <t t-if="line['discount'] != 0" t-set="price_total_after_disc" t-value="price_total_before_disc - disc_amount" />
+                                <td>
+                                    <t t-if="line['discount'] != 0" t-esc="'%.2f' % price_total_after_disc" />
+                                    <t t-else="" t-esc="'%.2f' % price_total_before_disc"/>
+                                </td>
+                            </t>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <br/>
+
+                    <!-- <h3>Payments</h3>
+                    <table  class="table table-sm table-bordered">
+                        <thead><tr>
+                            <th>Name</th>
+                            <th>Total</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr t-foreach='payments' t-as='payment'>
+                            <td><t t-esc="payment['name']" /></td>
+                            <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        </tr>
+
+                        <tr t-foreach='loyaltys' t-as='line'>                            
+                            <td><t t-esc="line['name']"/></td>
+                            <td><t t-esc="line['total']"/></td>                        
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <br/> -->
+
+
+                    <!-- <h3>Payments</h3>
+                    <table  class="table table-sm table-bordered">
+                        <thead><tr>
+                            <th>Name</th>
+                            <th></th>
+                            <th>Total</th>
+                        </tr></thead>
+                        <tbody>
+                            <tr t-foreach='delivery_partners' t-as='line'>                            
+                                <td><t t-esc="line['payment_methods'][0]['name']"/></td>
+                                <td><t t-esc="line['name']"/></td>  
+                                <td><t t-esc="line['payment_methods'][0]['amount']"/></td>                        
+                            </tr>
+                            <tr t-foreach='payments' t-as='payment'>
+                                <td><t t-esc="payment['name']" /></td>
+                                <td></td>
+                                <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                            </tr>
+                            <tr t-foreach='loyaltys' t-as='line'>                            
+                                <td><t t-esc="line['name']"/></td>
+                                <td></td>
+                                <td><t t-esc="line['total']"/></td>                        
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br/> -->
+
+
+                    <h3>Revenues</h3>
+                        <table class="table table-sm table-bordered">
+
+                            <t t-set="sales_total" t-value="0"/>
+                            <t t-set="disc_amount_total" t-value="0"/>
+                            <t t-set="taxes_total_amount" t-value="0"/>
+                            <t t-set="sales_total_w_tax" t-value="0"/>
+
+                            <t t-foreach='products' t-as='line'>
+<!--                            line sales total-->
+                                <t t-set="line_total" t-value="line['price_unit'] * line['quantity']" />
+<!--                            line discount amount-->
+                                <t t-if="line['discount'] != 0" t-set="line_disc_amount" t-value="line['discount'] / 100 * line_total" />
+
+                            <!-- lineS total-->
+                            <t t-set="sales_total" t-value="sales_total + line_total"/>
+                            <!-- lineS discount amount total-->
+                            <t t-if="line['discount'] != 0" t-set="disc_amount_total" t-value="disc_amount_total + line_disc_amount" />
+                            </t>
+
+<!--                        total taxes amount-->
+                            <t t-foreach='taxes' t-as='tax'>
+                                <t t-set="taxes_total_amount" t-value="taxes_total_amount + tax['tax_amount']" />
+                            </t>
+
+                            <!-- total sales + total taxes amount-->
+                            <t t-set="sales_total_w_tax" t-value="sales_total + taxes_total_amount" />
+
+                            <tbody>
+                                <tr>
+                                    <th>Sales</th>
+                                    <td><t t-esc="'%.2f' % sales_total"/></td>
+                                </tr>
+                                <tr style="border-bottom:2px solid">
+                                    <th>Discounts</th>
+                                    <td><t t-esc="'%.2f' % disc_amount_total"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Net Sales Including Tax</th>
+                                    <td><t t-esc="'%.2f' % sales_total_w_tax"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Taxes</th>
+                                    <td><t t-esc="'%.2f' % taxes_total_amount"/></td>
+                                </tr>
+                                <tr>
+                                    <th>Net Sales Excluding Tax</th>
+                                    <td><t t-esc="'%.2f' % sales_total"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    <h3>Sales By Staff</h3>
+                        <table class="table table-sm table-bordered">
+
+<!--                            get sales by staff total sales-->
+                            <t t-set="staff_sales_qty" t-value="0"/>
+                            <t t-set="staff_sales_total" t-value="0"/>
+                            <t t-foreach='employees_orders_data' t-as='line'>
+                                <t t-set="staff_sales_qty" t-value="staff_sales_qty + line['employee_total_qty']"/>
+                                <t t-set="staff_sales_total" t-value="staff_sales_total + line['employee_total_amount']"/>
+                            </t>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach='employees_orders_data' t-as='line'>
+                                    <th><t t-esc="line['employee_name']"/></th>
+                                    <td><t t-esc="'%.2f' % line['employee_total_qty']"/></td>
+                                    <td><t t-esc="'%.2f' % line['employee_total_amount']"/></td>
+
+                                </tr>
+                                <tr style="border-top:2px solid #333">
+                                    <th>Total Sales</th>
+                                    <td><t t-esc="'%.2f' % staff_sales_qty"/></td>
+                                    <td><t t-esc="'%.2f' % staff_sales_total"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <h3>Sales By Category</h3>
+                        <table class="table table-sm table-bordered">
+
+<!--                        get sales by category total sales-->
+                            <t t-set="category_sales_qty" t-value="0"/>
+                            <t t-set="category_sales_total" t-value="0"/>
+                            <t t-foreach='categories_orders_data' t-as='line'>
+                                <t t-set="category_sales_qty" t-value="category_sales_qty + line['categ_total_qty']"/>
+                                <t t-set="category_sales_total" t-value="category_sales_total + line['categ_total_amount']"/>
+                            </t>
+
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach='categories_orders_data' t-as='line'>
+                                    <th><t t-esc="line['categ_name']"/></th>
+                                    <td><t t-esc="'%.2f' % line['categ_total_qty']"/></td>
+                                    <td><t t-esc="'%.2f' % line['categ_total_amount']"/></td>
+                                </tr>
+                                <tr>
+                                    <th style="border-top:2px solid #333">Total Sales</th>
+                                    <td><t t-esc="'%.2f' % category_sales_qty"/></td>
+                                    <td><t t-esc="'%.2f' % category_sales_total"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <h3>Payments</h3>
+                        <table  class="table table-sm table-bordered">
+                            <thead><tr>
+                                <th>Name</th>
+                                <th></th>
+                                <th>Total</th>
+                            </tr></thead>
+                            <tbody>
+                                <!-- with food app -->
+                                <tr t-foreach='delivery_partners' t-as='line'>
+                                    <td><t t-esc="line['payment_method_name']"/></td>
+                                    <tr t-foreach='line["delivery_partner_lines"]' t-as='partner_lines'>
+                                        <td></td>
+                                        <td><t t-esc="partner_lines['name']"/></td>
+                                        <td><t t-esc="partner_lines['amount']"/></td>
+                                    </tr>
+                                </tr>
+                                <!-- non food app -->
+                                <tr t-foreach='payments' t-as='payment'>
+                                    <td><t t-esc="payment['name']" /></td>
+                                    <td></td>
+                                    <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                                </tr>
+                                <!-- loyalty add in payments custom -->
+                                <tr t-foreach='loyaltys' t-as='line'>
+                                    <td><t t-esc="line['name']"/></td>
+                                    <td></td>
+                                    <td><t t-esc="line['total']"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <br/>
+                        
+
+                    <h3>Taxes</h3>
+                    <table  class="table table-sm table-bordered">
+                        <thead><tr>
+                            <th>Name</th>
+                            <th>Tax Amount</th>
+                            <th>Base Amount</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr t-foreach='taxes' t-as='tax'>
+                            <td><t t-esc="tax['name']" /></td>
+                            <td><t t-esc="tax['tax_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                            <td><t t-esc="tax['base_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <br/>
+
+                    <strong>Total Paid: <t t-esc='total_paid' t-options="{'widget': 'float', 'precision': currency_precision}"/></strong>
+
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

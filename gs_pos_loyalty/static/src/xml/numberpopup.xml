@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+  <t t-name="NumberPopup" t-inherit="point_of_sale.NumberPopup" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[hasclass('popup-number')]" position="attributes">
+      <attribute name="style">height:570px</attribute>
+    </xpath>
+    <xpath expr="//header[hasclass('title')]" position="after">
+      <textarea t-att-value="props.body"
+                disabled="true"
+                style="resize: none;"
+                rows="4" />
+    </xpath>
+  </t>
+</templates>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+
+  <t t-name="ClientDetailsEdit" t-inherit="point_of_sale.ClientDetailsEdit" t-inherit-mode="extension" owl="1">
+
+      <xpath expr="//input[hasclass('client-name')]" position="after">
+        <style>
+/* The container */
+.container {
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-left: 70px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #fff;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:before {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:before {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:before {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+          border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
+        <!-- <input class="detail client-loyalty" name="loyalty"
+                type="checkbox"/>-->
+        <label class="container" style="width:370px">Eligible for loyalty
+  <input type="checkbox"
+         class="eligible_loyalty"
+         t-on-change="captureChange"
+         t-on-click="changeValue()"
+         name="loyalty"
+         t-att-checked="props.partner.loyalty  ? 'checked' : undefined"/>
+          <span class="checkmark"></span>
+         </label>
+        </xpath>
+    <xpath expr="//div[hasclass('client-details-right')]" position="inside">
+      <div class="client-detail" t-att-style="!props.partner.loyalty ? 'display: none': undefined">
+        <span class="label">Loyalty</span>
+        <select class="detail client-loyalty needsclick" name="loyalty_id"
+                t-on-change="captureChange">
+          <option value="">None</option>
+          <t t-foreach="env.pos.loyalties" t-as="loyalty" t-key="loyalty.id">
+            <option t-att-value="loyalty.id"
+                    t-att-selected="props.partner.loyalty_id ? ((loyalty.id === props.partner.loyalty_id[0]) ? true : undefined) : undefined">
+                <t t-esc="loyalty.name" />
+            </option>
+          </t>
+        </select>
+      </div>
+    </xpath>
+    <xpath expr="//input[@name='loyalty_points']" position="attributes">
+      <attribute name="readonly">1</attribute>
+    </xpath>
+    <xpath expr="//input[@name='loyalty_points']/parent::div" position="attributes">
+      <attribute name="t-att-style">!props.partner.loyalty ? 'display: none': undefined</attribute>
+    </xpath>
+    <xpath expr="//input[@name='loyalty_points']/parent::div/child::span" position="replace">
+      <span class="label">Points</span>
+    </xpath>
+    </t>
+
+ </templates>

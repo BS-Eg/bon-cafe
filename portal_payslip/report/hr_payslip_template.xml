@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_hr_payslip_document">
+		<t t-call="web.external_layout">
+			<t t-set="doc" t-value="doc.with_context({'lang':doc.user_id.partner_id.lang})" />
+			<t t-foreach="docs" t-as="o">
+				<div class="page" style="font-size: 15px">
+					<div class="oe_structure"/>
+                    
+                    <h2 class="mt16">
+                        <span>Maintenance Request # </span>
+                        <!-- <span t-field="o.name"/> -->
+                    </h2>
+
+                    <div class="row mt32 mb32" id="informations">                        
+                        <!-- <div t-if="o.equipment_id" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Equipment:</strong>
+                            <p class="m-0" t-field="o.equipment_id"/>
+                        </div>
+                        <div t-if="o.maintenance_type" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Maintenance Type:</strong>
+                            <p class="m-0" t-field="o.maintenance_type"/>
+                        </div>
+                        <div t-if="o.schedule_date" class="col-auto col-3 mw-100 mb-2">
+                            <strong>Scheduled Date:</strong>
+                            <p class="m-0" t-field="o.schedule_date"/>
+                        </div> -->
+                    </div>
+
+					
+					<div class="oe_structure"/>
+                    <!-- <p t-field="o.description" /> -->
+				</div>
+                
+			</t>
+		</t>
+	</template>
+
+	<template id="report_hr_payslip">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="portal_payslip.report_hr_payslip_document"
+					t-lang="doc.employee_id.lang"/>
+			</t>
+		</t>
+	</template>
+
+</odoo>

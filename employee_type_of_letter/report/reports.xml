@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+          <report id="print_report_pdf_letter_template"
+                model="letter.type.template"
+                string="Letter Template"
+                report_type="qweb-pdf"
+                name="employee_type_of_letter.report_pdf_letter_template"
+
+
+        />
+    </data>
+</odoo>

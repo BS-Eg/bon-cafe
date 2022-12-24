@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_leave_allocation_inherit_form_view2" model="ir.ui.view" >
+            <field name="name">hr.leave.allocation.form.inherit.view</field>
+            <field name="model">hr.leave.allocation</field>
+            <field name="inherit_id" ref="hr_holidays.hr_leave_allocation_view_form_manager"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="create_by" readonly="1"/>
+                    <field name="contract_id" readonly="0" required="1" options="{'no_edit':True,'no_create':True}"/>
+                    <field name="vacation_accrued" readonly="1"/>
+                    <field name="start_date" attrs="{'invisible':[('create_by','=','manually')]}"/>
+                    <field name="end_date"  attrs="{'invisible':[('create_by','=','manually')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

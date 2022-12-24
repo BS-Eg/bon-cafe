@@ -1,0 +1,24 @@
+<odoo>
+  <record id="view_loyalty_rule_form" model="ir.ui.view">
+    <field name="name">loyalty.rule.form</field>
+    <field name="inherit_id" ref="pos_loyalty.view_loyalty_rule_form"/>
+    <field name="model">loyalty.rule</field>
+    <field name="arch" type="xml">
+      <field name="points_currency" position="after">
+        <field name="min_amount"/>
+        <field name="max_amount"/>
+      </field>
+    </field>
+  </record>
+  <record id="view_loyalty_program_form" model="ir.ui.view">
+    <field name="name">loyalty.program.form</field>
+    <field name="inherit_id" ref="pos_loyalty.view_loyalty_program_form"/>
+    <field name="model">loyalty.program</field>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='rule_ids']/tree/field[@name='points_currency']" position="after">
+        <field name="min_amount"/>
+        <field name="max_amount"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

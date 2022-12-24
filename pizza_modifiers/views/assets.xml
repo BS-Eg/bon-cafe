@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets" inherit_id="point_of_sale.assets" name="Modifier Assets">
+        <xpath expr="//link[@id='pos-stylesheet']" position="after">
+            <link rel="stylesheet" href="/pizza_modifiers/static/src/css/style.css"/>
+        </xpath>
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/imageMapResizer.min.js"></script>
+            <!-- <script type="text/javascript" src="/pizza_modifiers/static/src/js/script.js"></script> -->
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/db.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/models.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/Popups/ModifierProductPopup.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/Popups/SliceProductPopup.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/Screens/ProductScreen/ProductScreen.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/Screens/ProductScreen/Orderline.js"></script>
+            <script type="text/javascript" src="/pizza_modifiers/static/src/js/OrderReceipt.js"></script>
+        </xpath>
+    </template>
+</odoo>

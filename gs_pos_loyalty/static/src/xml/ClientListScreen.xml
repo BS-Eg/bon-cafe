@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+
+  <t t-name="ClientListScreen" t-inherit="point_of_sale.ClientListScreen" t-inherit-mode="extension" owl="1">
+    <xpath expr="//tbody[@class='client-list-contents']" position="replace">
+      <tbody class="client-list-contents">
+        <t t-foreach="clients" t-as="partner"
+           t-key="partner.id">
+          <t t-if="!partner.delivery_partner">
+            <ClientLine partner="partner"
+                        selectedClient="state.selectedClient"
+                        detailIsShown="state.detailIsShown"
+                        t-on-click-client="clickClient" />
+          </t>
+        </t>
+  </tbody>
+    </xpath>
+  </t>
+</templates>
+
+

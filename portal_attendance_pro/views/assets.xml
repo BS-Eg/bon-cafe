@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_attendance_assets_frontend" name="portal_attendance_pro assets frontend" inherit_id="website.assets_frontend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" type="text/css" href="/portal_attendance_pro/static/src/js/lib/sweetalert2/sweetalert2.css"/>
+        <script type="text/javascript" src="/portal_attendance_pro/static/src/js/lib/sweetalert2/sweetalert2.js"></script>
+
+        <script type="text/javascript" src="/portal_attendance_pro/static/src/js/portal_attendance.js"></script>
+        <link rel="stylesheet" type="text/css" href="/portal_attendance_pro/static/src/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/portal_attendance_pro/static/src/css/olmap.css"/>
+      </xpath>
+    </template>
+
+    <template id="portal_attendance_assets_backend" name="portal_attendance_pro assets backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+          <link rel="stylesheet" type="text/css" href="/portal_attendance_pro/static/src/css/olmap.css"/>
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_drawing.js"></script>
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_model.js"></script>
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_controller.js"></script>
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_renderer.js"></script>
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_view.js"></script>
+
+          <script type="text/javascript" src="/portal_attendance_pro/static/src/js/geofence_common.js"></script>
+        </xpath>
+    </template>
+
+</odoo>

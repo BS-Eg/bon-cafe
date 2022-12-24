@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    	<record id="iherited_view_partner_from" model="ir.ui.view">
+            <field name="name">inherit.res.partner.from</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="delivery_partner" string="Delivery Partner"/>
+                    <field name="customer_rank" string="Customer Rank"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

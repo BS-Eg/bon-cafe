@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="clinet_line_template" xml:space="preserve">
+   
+    <t t-name="ClientLine" t-inherit="point_of_sale.ClientLine" t-inherit-mode="extension">
+        <xpath expr="//tr/td/span[@t-if='highlight']" position="replace">
+            <span t-if="highlight"><br/></span>            
+        </xpath>
+    </t>
+    
+</templates>

@@ -1,0 +1,47 @@
+<odoo>
+    <record id="gs_eos_monthly_view_tree" model="ir.ui.view">
+        <field name="name">gs.eos.monthly.view.tree</field>
+        <field name="model">gs.eos.monthly</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="date"/>
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="eos_total_amount_month"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gs_eos_monthly_view_form" model="ir.ui.view">
+        <field name="name">gs.eos.monthly.view.form</field>
+        <field name="model">gs.eos.monthly</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h2>
+                        <field name="name" readonly="1"/>
+                    </h2>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="eos_total_amount_month"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="gs_eos_monthly_action" model="ir.actions.act_window">
+        <field name="name">End Of Service Monthly</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">gs.eos.monthly</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sub_gs_eos_monthly" name="EOS Monthly" parent="gs_hr_eos.menu_gs_eos" action="gs_eos_monthly_action" sequence="2"/>
+
+</odoo>

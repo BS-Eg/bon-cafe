@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_details_wizard_custom" model="ir.ui.view">
+        <field name="name">pos.details.wizard.form</field>
+        <field name="model">pos.details.wizard</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_details_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='start_date']" position="before">
+                <table style="width: 104%;">
+                    <button name="calculate_date" context="{'day': 'today'}" string="Today" type="object" class="btn-primary"/>
+                    <button name="calculate_date" context="{'day': 'yesterday'}" string="Yesterday" type="object" class="btn-primary"/>
+                    <button name="calculate_date" context="{'day': 'thisweek'}" string="This Week" type="object" class="btn-primary"/>
+                    <button name="calculate_date" context="{'day': 'thismonth'}" string="This Month" type="object" class="btn-primary"/>
+                    <button name="calculate_date" context="{'day': 'lastmonth'}" string="Last Month" type="object" class="btn-primary"/>
+                </table>
+                <br/>
+                <br/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- filters in point_of_sale/reporting/order -->
+
+    <!-- <record id="view_report_pos_order_search_inherit_custom_filter_today" model="ir.ui.view">
+        <field name="name">report.pos.order.search.inherit</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_date']" position='after'>
+                <filter string="Today" name="today"
+                domain="['&amp;', ('date', '&gt;', context_today().strftime('%Y-%m-%d 03:00:00')), ('date', '&lt;', ((context_today()+relativedelta(days=1)).strftime('%Y-%m-%d 03:00:00')))]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_report_pos_order_search_inherit_custom_filter_yesterday" model="ir.ui.view">
+        <field name="name">report.pos.order.search.inherit</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_date']" position='after'>
+                    <filter string="Yesterday" name="yesterday"
+                            domain="['&amp;', ('date', '&lt;', context_today().strftime('%Y-%m-%d 03:00:00')), ('date', '&gt;', ((context_today()-relativedelta(days=1)).strftime('%Y-%m-%d 03:00:00')))]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_report_pos_order_search_inherit_custom_filter_lastmonth" model="ir.ui.view">
+        <field name="name">report.pos.order.search.inherit</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_date']" position='after'>
+                    <filter string="Last Month" name="lastmonth"
+                            domain="['&amp;', ('date', '&lt;', context_today().strftime('%Y-%m-01 03:00:00')), ('date', '&gt;', ((context_today()-relativedelta(months=1)).strftime('%Y-%m-01 03:00:00')))]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_view_pos_order" model="ir.ui.view">
+            <field name="name">POS orders</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='order_fields']" position="inside">
+                    <field name="pos_delivery_partner" string="Delivery Partner"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+
+
+</odoo>

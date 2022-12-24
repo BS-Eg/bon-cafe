@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+	<t t-name="ProductItem" t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//article" position="inside">
+            <t t-if="props.product.is_combo_product">
+                <div class="product_combo_item">
+                	<span>Combo</span>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="PosComboCartItem" owl="1">
+        <div class="pos_combo_cart_item">
+            <h4 class="combo_cart_title">COMBO CART</h4>
+            <div class="cart_box_combo">
+                <ul>
+                <t t-foreach="props.combo_cate_ids" t-as="line" t-key="lik">
+                    <t t-if="props.combo_lines[line.category_id[0]]">
+                        <li class="cate_name">
+                            <t t-esc="line.category_id[1]"/>
+                        </li>
+                        <t t-foreach="props.combo_lines[line.category_id[0]]" t-as="pro_obj" t-key="pro_obj">
+                            <li class="product_name_combo_cl">
+                                <div class="cart_p_001">
+                                    <div class="cart_p_002">
+                                        <span class="cart_p_003" t-esc="pro_obj.product.display_name"/><br/>
+                                        <div class="combo_cart_price_info">
+                                            <span class="cart_p_004" t-esc="pro_obj.price"/> X <span t-esc="pro_obj.qty"/> 
+                                        </div>
+                                    </div>
+                                    <div class="cart_p_005">
+                                        <span class="cart_p_006" t-esc="pro_obj.total_price"/>
+                                    </div>
+                                </div>
+                            </li>
+                        </t>
+                    </t>
+                </t>
+                <li class="main_combo_item_totals" t-if="props.combo_lines.length != 0">
+                    <div class="main_product_total_cl">
+                        <span class="main_product_total_cl_001" t-esc="props.product.display_name"/>:
+                        <span class="main_product_total_cl_002" t-esc="product_price"/>
+                    </div>
+                </li>
+                <li class="combo_item_totals" t-if="props.combo_lines.length != 0">
+                    ITEMS TOTAL : <span class="combo_itm_total" t-esc="props.combo_items_totals"/>
+                </li>
+                <li class="combo_main_total" t-if="props.combo_lines.length != 0">
+                    TOTAL : <span t-esc="total_main_plus_item"/>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </t>
+    <t t-name="PosComboItemDetails" owl="1">
+        <div class="pos_combo_item_details">
+            <h4 class="combo_item_cart_title"><t t-esc="props.combo.name" /></h4>
+            <div class="combo_pack_box">
+                <ul>
+                    <t t-foreach="props.combo_cat_items" t-as="combo_cat" t-key="combo_cat.id">
+                        <li t-att-class="{active : combo_cat_index == 0}" t-att-data-pos_combo_cate_id="combo_cat.id" t-on-click="select_categories"><t t-esc="combo_cat.category_id[1]"/></li>
+                    </t>
+                </ul>
+            </div>
+            <t t-foreach="props.combo_cat_items" t-as="combo_cat_obj" t-key="combo_cat_obj.id">
+                <ComboCatProducts combo_cat_obj="combo_cat_obj" combo_cat_index="combo_cat_obj_index" combo="props.combo" check_is_max="props.check_is_max" combo_lines="props.combo_lines"/>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="ComboCatProducts" owl="1">
+        <div class="product_display_block_combo" t-att-class="{active : props.combo_cat_index == 0}" t-att-data-pos_combo_cate_id="props.combo_cat_obj.id">
+            <t t-foreach="combo_product_items" t-as="pos_com_product_item" t-key="pos_com_product_item.id">
+                <PosComboProductItem product="pos_com_product_item" combo_cat_obj="props.combo_cat_obj" combo="props.combo" check_is_max="props.check_is_max" combo_lines="props.combo_lines"/>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="PosComboConfigurePopup" owl="1">
+        <div role="dialog" class="modal-dialog pos_combo_configure_popup">
+            <div class="popup popup-text">
+                <main class="body pos_combo_configure_popuo_cart_item col-lg-12 col-md-12 col-sm-12">
+                    <div class="row">
+                        <!-- <div class="cart_display_block_main"> -->
+                        <PosComboCartItem combo_lines="combo_lines" combo_items_totals="combo_items_totals" combo_cate_ids="combo_cat_items" product="props.product" digit_combo_items_totals="digit_combo_items_totals"/>
+                        <PosComboItemDetails product="props.product" combo="combo_info" combo_cat_items="combo_cat_items" check_is_max="check_is_max" combo_lines="combo_lines"/>
+                    </div>
+                </main>
+                <footer class="footer">
+                    <div class="button highlight confirm" t-on-click="confirm">
+                        Apply
+                    </div>
+                    <div class="button cancel" t-on-click="cancel">
+                        Cancel
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="PosComboProductItem" owl="1">
+        <article class="product" tabindex="0" t-att-class="select_item" t-on-click="OnSelectComboProduct" t-att-data-product_id="props.product.id" t-att-data-category_id="props.combo_cat_obj.category_id[0]" t-att-data-qty="select_qty">
+            <div class="product-img">
+                <i role="img" aria-label="Remove" title="Remove" class="product_remove_button fa fa-trash"
+                    t-on-click.stop="onProductRemoveClick()"
+                />
+                <img t-att-src="imageUrl" t-att-alt="props.product.display_name" />
+                <span class="price-tag">
+                    <t t-esc="price" />
+                </span>
+                <span class="combo_item_qty_cl">
+                    Qty:<span class="qty_text">
+                        <t t-esc="select_qty"/>
+                    </span> 
+                </span>
+            </div>
+            <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
+                <t t-esc="props.product.display_name" />
+            </div>
+        </article>
+    </t>
+
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+        <xpath expr="//li[1]" position="inside">
+            <t t-if="props.line.product.is_combo_product">
+                <ComboOrderLine line="props.line"/>
+            </t>
+        </xpath>
+    </t>
+    <t t-name="OrderlineDetails" t-inherit="point_of_sale.OrderlineDetails" t-inherit-mode="extension" owl="1">
+        <xpath expr="//li[1]" position="inside">
+            <ComboOrderLine line="props.line"/>
+        </xpath>
+    </t>
+    <t t-name="ComboOrderLine" owl="1">
+        <li class="info combo_order_lines">
+            <div t-foreach="pos_combo_order_lines" t-as="pcline" t-key="pcline" t-if="pos_combo_order_lines.length != 0">
+                <ComboCatName com_cat_id="pcline"/>
+                <ComboProductItems com_cat_id="pcline" pos_combo_order_lines="pos_combo_order_lines"/>
+            </div>
+            <div class="edit_combo_icon" t-att-class="is_hide_edit" t-on-click="edit_combo_product" line="props.line"><span class="fa fa-edit"/>EDIT</div>
+        </li>
+    </t>
+
+    <t t-name="ComboCatName" owl="1">
+        <div t-if="pos_combo_category" class="combo_cat_title">
+            <t t-esc="pos_combo_category.name"/>
+        </div>
+    </t>
+
+    <t t-name="ComboProductItems" owl="1">
+        <div t-if="combo_product_items.length != 0">
+            <t t-foreach="combo_product_items" t-as="pcm_item" t-key="pcm_item">
+                <div class="combo_product_info">
+                    <span class="combo_product_info_001" t-esc="pcm_item.product_name"/> : <span class="combo_product_info_002" t-esc="pcm_item.qty"/>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="OrderLinesReceipt" t-inherit="point_of_sale.OrderLinesReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='line.pack_lot_lines']" position="after">
+            <ComboLinesReceipt line="line"/>
+        </xpath>
+    </t>
+    <t t-name="ComboLinesReceipt" owl="1">
+        <div t-if="p_combo_lines.length != 0">
+            <t t-foreach="p_combo_lines" t-as="pcmline">
+                <div t-esc="pcmline.category" class="receipt_combo_category"/>
+                <t t-foreach="pcmline.items" t-as="pcm_item">
+                    <div class="receipt_pos_combo_item">
+                        <span t-esc="pcm_item.item_name"/>  X  
+                        <span t-esc="pcm_item.item_qty"/>
+                    </div>
+                </t>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="CustomerFacingDisplayOrderLines" t-extend="CustomerFacingDisplayOrderLines">
+        <t t-jquery=".pos_orderlines_item" t-operation="append">
+            <div class="combo_lines_customer_display" t-if="orderline">
+                <t t-foreach="orderline.get_combo_customer_data()" t-as="pcmline">
+                    <div t-esc="pcmline.category" class="receipt_combo_category"/>
+                    <t t-foreach="pcmline.items" t-as="pcm_item">
+                        <div class="receipt_pos_combo_item">
+                            <span t-esc="pcm_item.item_name"/>  X  
+                            <span t-esc="pcm_item.item_qty"/>
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </t>
+    <t t-name="CustomerFacingDisplayHead" t-extend="CustomerFacingDisplayHead">
+        <t t-jquery="link:last-child" t-operation="after">
+            <link rel="stylesheet" type="text/css" href="/wt_pos_combo/static/src/css/customer_combo_screen.css"/>
+        </t>
+    </t>
+</templates>

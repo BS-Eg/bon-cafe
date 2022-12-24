@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+
+        <record id="add_analyatic_account_form_inher_account" model="ir.ui.view">
+            <field name="name">account.move.form</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+          <xpath expr="//field[@name='ref']" position="after">
+                <field name="account_analytic_id"   groups="analytic.group_analytic_accounting" attrs="{'readonly': [('state', 'in', ('posted'))]}"/>
+                       <field name="analytic_tag_ids"  groups="analytic.group_analytic_tags" widget="many2many_tags" attrs="{'readonly': [('state', 'in', ('posted'))]}"/>
+                 </xpath>
+
+
+            </field>
+        </record>
+
+
+        <record id="add_analyatic_account_form_inher_stock" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+          <xpath expr="//field[@name='origin']" position="after">
+                <field name="account_analytic_id"   groups="analytic.group_analytic_accounting" />
+                       <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" widget="many2many_tags"   />
+                 </xpath>
+
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

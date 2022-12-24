@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="get_data_in_notification_cron">
+            <field name="name">Get Data in Notification Form</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_get_data()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_notification_cron">
+            <field name="name">Send Notification</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_notification()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_notification_in_minutes_cron">
+            <field name="name">Send Notification in minutes</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_notification_in_minutes()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_notification_in_hours_cron">
+            <field name="name">Send Notification in hours</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_notification_in_hours()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_notification_in_day_cron">
+            <field name="name">Send Notification in days</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_notification_in_day()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+
+        <record model="ir.cron" id="send_email_in_minutes_cron">
+            <field name="name">Send Email in minutes</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_email_in_minutes()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_email_in_hours_cron">
+            <field name="name">Send Email in hours</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_email_in_hours()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+        <record model="ir.cron" id="send_email_in_day_cron">
+            <field name="name">Send Email in days</field>
+            <field name="model_id" ref="model_gs_notification"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_email_in_day()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

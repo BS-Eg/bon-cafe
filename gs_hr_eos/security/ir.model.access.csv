@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gs_end_reason,gs_end_reason,model_gs_end_reason,,1,1,1,1
+access_gs_eos,gs_eos,model_gs_eos,,1,1,1,1
+access_gs_eos_monthly,gs_eos_monthly,model_gs_eos_monthly,,1,1,1,1

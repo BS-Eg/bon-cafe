@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_docs_entry" inherit_id="portal.portal_docs_entry">
+        <xpath expr="//a" position="attributes">
+            <attribute name="t-if">(title in ['Attendance', 'Employee Time Off', 'PlaySlips'] and user_id.has_group('base.group_portal') and  user_id.employee_id) or (title not in ['Attendance', 'Employee Time Off', 'PlaySlips'] and not (user_id.has_group('base.group_portal') and  user_id.employee_id))</attribute>
+        </xpath>
+    </template>
+	<template id="portal_attendace" name="Checkin / checkout">
+		<t t-call="website.layout">
+    		<div id="wrap" class="portal_attendace_main_cl oe_structure oe_empty">
+    				<div class="attendace_employye_cl">
+    					
+    				</div>
+    			
+    		</div>
+        </t>
+	</template>
+
+     <template id="portal_my_home_sale" name="Show Attendance" customize_show="True" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Attendance</t>
+                <t t-set="url" t-value="'/my/attendances'"/>
+                <t t-set="placeholder_count" t-value="'attendances_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">PlaySlips</t>
+                <t t-set="url" t-value="'/my/payslip'"/>
+                <t t-set="placeholder_count" t-value="'slip_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Employee Time Off</t>
+                <t t-set="url" t-value="'/my/leaves'"/>
+                <t t-set="placeholder_count" t-value="'myleaves_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_attendances" name="My Attendance">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Attendaces</t>
+            </t>
+            <t t-if="not attendances">
+                <p>There are currently no attendance for your account.</p>
+            </t>
+            <t t-if="attendances" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Employee</th>
+                        <th class="text-center">CheckIn</th>
+                        <th class="text-center">Checkout</th>
+                        <th class="text-right">Work Hours</th>
+                    </tr>
+                </thead>
+                <t t-foreach="attendances" t-as="attendance">
+                    <tr>
+                        <td><t t-esc="attendance.employee_id.name"/></td>
+                        <td class="text-center"><span t-field="attendance.check_in"/></td>
+                        <td class="text-center"><span t-field="attendance.check_out"/></td>
+                        <td class="text-right">
+                            <span t-field="attendance.worked_hours" t-options='{"widget": "float_time"}'/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_home_menu_attendace" name="Portal layout : attendance menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'attendance'" class="breadcrumb-item active">
+               Attendaces
+            </li>
+            <li t-if="page_name == 'myleave' or leave_sudo" class="breadcrumb-item">
+               Time Off
+            </li>
+            <li t-if="leave_sudo" class="breadcrumb-item active">
+                <span t-field="leave_sudo.employee_id"/>
+            </li>
+            <li t-if="page_name == 'slip' or hr_payslip and hr_payslip.state in ('draft', 'done', 'paid')" t-attf-class="breadcrumb-item #{'active ' if not hr_payslip else ''}">
+                <a t-if="hr_payslip" t-attf-href="/my/payslip?{{ keep_query() }}">Payslip</a>
+                <t t-else="">Payslip</t>
+            </li>
+                <li t-if="page_name == 'payslip'" t-attf-class="breadcrumb-item #{'active ' if payslip else ''}">
+                    <a t-if="payslip" t-attf-href="/my/payslip">Payslips</a>
+                    <t t-else="">Payslips</t>
+                </li>
+                <li t-if="payslip" class="breadcrumb-item active">
+                    <t t-esc="payslip.name"/>
+                </li>
+        </xpath>
+    </template>
+
+    <template id="portal_time_off_form" name="Time Off">
+        <t t-call="website.layout">
+            <div id="wrap" class="portal_time_off_main_cl">
+                <div class="container">
+                    <div class="row">
+                        <form action="/take/leave" class="col-md-8 offset-md-2 pt-1 card mt32 mb32">
+                            <div class="alert alert-danger" role="alert" t-if="error">
+                                <t t-esc="error"/>
+                            </div>
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10 col-form-label">
+                                  <strong t-if="employee_id"> <t t-esc="employee_id.name"/></strong>
+                                </div>
+                              </div>
+                            <div class="form-group row">
+                                <label for="leave_type" class="col-sm-2 col-form-label">Leave Type</label>
+                                 <div class="col-sm-10">
+                                  <select class="form-control" name="leave_type" id="leave_type">
+                                    <t t-foreach="leave_types" t-as="leave_type">
+                                       <option t-att-value="leave_type.id"><t t-esc="leave_type.name"/></option>
+                                    </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="daterange" class="col-sm-2 col-form-label">Date From TO End</label>
+                                 <div class="col-sm-10">
+                                    <input type="text" name="daterange" class="form-control" value=""/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="number_of_days" class="col-sm-2 col-form-label">Duration (Days)</label>
+                                 <div class="col-sm-10">
+                                    <input type="text" name="number_of_days" readonly="1" class="form-control" value="1"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label">Description</label>
+                                 <div class="col-sm-10">
+                                    <textarea type="text" name="name" class="form-control" rows="3"/>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <input type="submit" name="submit" class="btn btn-primary pull-right"></input>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template> 
+
+    <template id="portal_my_leave_attendances" name="My leaves">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Time Off</t>
+            </t>
+            <t t-if="not HrLeaves">
+                <p>There are currently no time off for your account.</p>
+            </t>
+            <t t-if="HrLeaves" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Employee</th>
+                        <th class="text-center">Time Of Type</th>
+                        <th class="text-center">Date From</th>
+                        <th class="text-center">Date To</th>
+                        <th class="text-center">Duration</th>
+                        <th class="text-right">Status</th>
+                    </tr>
+                </thead>
+                <t t-foreach="HrLeaves" t-as="leave">
+                    <tr>
+                        <td><a t-attf-href="/my/leave/#{leave.id}"><t t-esc="leave.employee_id.name"/></a></td>
+                        <td class="text-center"><span t-field="leave.holiday_status_id"/></td>
+                        <td class="text-center"><span t-field="leave.date_from"/></td>
+                        <td class="text-center"><span t-field="leave.date_to"/></td>
+                        <td class="text-center"><span t-field="leave.number_of_days_display"/></td>
+                        <td class="text-right">
+                            <span t-field="leave.state" />
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="my_leave_main_page" name="Time Off Details">
+        <t t-call="portal.portal_layout">
+            <div class="card">
+              <h5 class="card-header"><t t-esc="leave_sudo.holiday_status_id.name"/>
+               <span class="pull-right"><small>Status:</small>  
+                  <span class="badge badge-info text-capitalize" t-if="leave_sudo.state == 'draft'">
+                      <span t-field="leave_sudo.state"/>
+                  </span>
+                  <span class="badge badge-warning text-capitalize" t-if="leave_sudo.state in ('confirm','validate1')">
+                      <span t-field="leave_sudo.state"/>
+                  </span>
+                  <span class="badge badge-success text-capitalize" t-if="leave_sudo.state == 'validate'">
+                      <span t-field="leave_sudo.state"/>
+                  </span>
+               </span>
+              </h5>
+              <div class="card-body">
+                 <table class="table table-borderless">
+                     <tr>
+                         <td><strong>Employee :</strong> <t t-esc="leave_sudo.employee_id.name"/></td>
+                         <td><strong>Date From :</strong> <span t-field="leave_sudo.date_from"/></td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <strong>Time Off Type :</strong> <span t-field="leave_sudo.holiday_status_id"/>
+                         </td>
+                         <td><strong>Date To :</strong> <span t-field="leave_sudo.date_to"/></td>
+                     </tr>
+                     <tr>
+                         <td><strong>Employee Note :</strong><span t-field="leave_sudo.name"/></td>
+                         <td><strong>Duration :</strong><span t-field="leave_sudo.number_of_days_display"/> Days</td>
+                     </tr>
+                 </table>
+              </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_my_payslips" name="My Playslips">
+            <t t-call="portal.portal_layout">
+                <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+                <t t-call="portal.portal_searchbar">
+                    <t t-set="title">Playslips</t>
+                </t>
+
+                <t t-if="not playslips">
+                    <p>There are currently no playslips for your account.</p>
+                </t>
+
+                <t t-if="playslips" t-call="portal.portal_table">
+                    <thead>
+                        <tr class="active">
+                            <th>Playslips #</th>
+                            <th class="text-right">Playslips Date</th>
+                            <th class="text-right">Valid Until</th>
+                            <th class="text-center"/>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="playslips" t-as="p">
+                        <tr>
+                            <!-- <td><a t-att-href="'/my/payslip/%s'%p.id"><t t-esc="p.name"/></a></td> -->
+                            <td>
+                                <a t-att-href="p.get_portal_url()">
+                                    <t t-esc="p.name"/>
+                                </a>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="p.date_from"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="p.date_to"/>
+                            </td>
+                            <td class="text-center">
+                                <span t-if="p.state == 'cancel'" class="badge badge-pill badge-secondary">
+                                    <i class="fa fa-fw fa-remove"/>
+ Cancelled</span>
+                                <!-- <span t-if="playslip.is_expired" class="badge badge-pill badge-secondary"><i class="fa fa-fw fa-clock-o"/> Expired</span> -->
+                            </td>
+                            <td class="text-right">
+                                <span t-field="p.net_wage"/>
+                            </td>
+                        </tr>
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    <template id="payslip_template" name="Payslip Portal Template" inherit_id="portal.portal_sidebar" primary="True">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row mt16 o_portal_sale_sidebar">
+
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
+
+                    <t t-set="title">
+                        <h2 class="mb-0">
+                            <b t-field="payslip.net_wage" data-id="total_amount"/>
+                        </h2>
+                    </t>
+                    <t t-set="entries">
+                        <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                            <li class="list-group-item flex-grow-1">
+                                <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                    <div class="btn-group  flex-grow-1 mr-1 mb-1">
+                                        <!-- <a class="btn btn-secondary btn-block o_download_btn" t-att-href="/my/payslip/%s'%p.id(report_type='pdf', download=True)" title="Download"> -->
+                                        <a class="btn btn-secondary btn-block o_download_btn" t-att-href="payslip.get_portal_url(report_type='pdf', download=True)" title="Download">
+                                            <i class="fa fa-download"/>Download</a>
+                                    </div>
+                                    <div class="btn-group flex-grow-1 mb-1">
+                                        <a class="btn btn-secondary btn-block o_print_btn o_portal_payslip_print" t-att-href="payslip.get_portal_url(report_type='pdf')" id="print_payslip_report" title="Print" target="_blank">
+                                            <i class="fa fa-print"/>Print</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="navspy list-group-item pl-0 flex-grow-1" t-ignore="true" role="complementary">
+                                <ul class="nav flex-column bs-sidenav"></ul>
+                            </li>
+
+
+                            <li t-if="payslip" class="list-group-item flex-grow-1">
+                                <div class="small mb-1">
+                                    <strong class="text-muted">Employee</strong>
+                                </div>
+                                <div class="row flex-nowrap">
+                                    <div class="col flex-grow-0 pr-2">
+                                        <img class="rounded-circle mr4 float-left o_portal_contact_img" t-att-src="image_data_uri(payslip.employee_id.avatar_1024)" alt="Contact"/>
+                                    </div>
+                                    <div class="col pl-0" style="min-width: 150px">
+                                        <span t-field="payslip.employee_id.user_id" t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}'/>
+                                        <a href="#discussion" class="small">
+                                            <i class="fa fa-comment"></i> Send message</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </t>
+                </t>
+
+                <div id="quote_content" class="col-12 col-lg justify-content-end">
+                    <div class="o_portal_html_view shadow p-3">
+                        <t t-call="hr_payroll.report_payslip"/>
+                    </div>
+                    <div id="payslip_communication" class="mt-4">
+                        <h2>History</h2>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="payslip"/>
+                        </t>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </xpath>
+
+    </template>
+</odoo>

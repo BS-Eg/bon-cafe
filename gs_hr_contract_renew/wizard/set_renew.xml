@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="set_renew_wizard_from_view" model="ir.ui.view">
+        <field name="name">set.renew.from.view</field>
+        <field name="model">set.renew.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Attendance data">
+                <sheet>
+                    <group>
+                        <p>
+                            <b>
+                                Are You Sure To Set A Renew ?
+                            </b>
+                        </p>
+                    </group>
+                </sheet>
+                 <footer>
+                      <button name="action_set_renew" string="Yas SET" type="object" class="btn-primary"/>
+                      <button string="Cancel" class="btn-default" special="cancel" />
+                  </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_set_renew_wizard" model="ir.actions.act_window">
+        <field name="name">SET RENEW</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">set.renew.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="set_renew_wizard_from_view"/>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,333 @@
+<odoo>
+    <data>
+        <template id="print_att_sheet">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row">
+
+                            <table width="100%">
+                                <tr>
+                                    <td width="70%"
+                                        style="font:20px lucida-console,sans-serif !important;vertical-align: bottom;">
+                                        <span class="align-bottom">
+                                            <strong>
+                                                Attendance Report Of
+                                                <t t-esc="o.date_to"
+                                                   t-options="{'widget': 'date'}"/>
+                                            </strong>
+                                        </span>
+                                    </td>
+                                    <td width="30%"
+                                        style="font:15px lucida-console,sans-serif !important; ">
+                                        <strong>Printing Date:</strong>
+                                        <t t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                           t-options="{'widget': 'date'}"/>
+                                        <br/>
+                                        <strong>Start Date:</strong>
+                                        <t t-esc="o.date_from"
+                                           t-options="{'widget': 'date'}"/>
+                                        <br/>
+                                        <strong>End Date:</strong>
+                                        <t t-esc="o.date_to"
+                                           t-options="{'widget': 'date'}"/>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                        <style>
+                            .att_table td{
+                            font-color:white;
+                            }
+
+                        </style>
+                        <div class="row" style="margin-top:20px;">
+                            <table width="100%"
+                                   class="att_table table table-condensed table table-striped">
+
+                                <thead style=" background-color: #3498DB;">
+                                    <tr>
+
+                                        <th
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            Employee Name
+                                        </th>
+                                        <th
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            Position
+                                        </th>
+                                        <th
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            Department
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="o.employee_id.name"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="o.employee_id.job_id.name"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="o.employee_id.department_id.name"/>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <table width="100%"
+                                   class="">
+
+
+                                <thead style=" background-color: #3498DB;">
+                                    <tr>
+                                        <th width="10%"
+                                            >
+
+                                                <strong style="color:white">Date</strong>
+
+
+                                        </th>
+                                        <th width="10%">
+
+                                                <strong style="color:white">Name</strong>
+
+                                        </th>
+                                        <th width="8%">
+
+                                                <strong style="color:white">IN</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                            >
+
+                                                <strong style="color:white">OUT</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                            >
+
+                                                <strong style="color:white">LATE</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                           >
+
+                                                <strong style="color:white">EO</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                            >
+
+                                                <strong style="color:white">ABT</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                            >
+
+                                                <strong style="color:white">WO</strong>
+
+                                        </th>
+                                        <th width="8%"
+                                            >
+
+                                                <strong style="color:white">OT</strong>
+
+                                        </th>
+                                        <th width="24%"
+                                            >
+
+                                                <strong style="color:white">Comments</strong>
+
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-set="sn" t-value="1"/>
+                                    <t t-set="tot_late" t-value="0"/>
+                                    <t t-set="tot_diff" t-value="0"/>
+                                    <t t-set="tot_ab" t-value="0"/>
+                                    <t t-set="ab_no" t-value="0"/>
+                                    <t t-set="tot_ot" t-value="0"/>
+                                    <tr t-foreach="o.line_ids"
+                                        t-as="line">
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                            <t t-esc="line.date"/>
+
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="line.date.strftime('%A')"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                            <t t-esc="line.ac_sign_in"
+                                               t-options="{'widget': 'float_time'}"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                            <t t-esc="line.ac_sign_out"
+                                               t-options="{'widget': 'float_time'}"/>
+
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-if="line.late_in >0">
+                                                <t t-esc="line.late_in"
+                                                   t-options="{'widget': 'float_time'}"/>
+                                            </t>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-if="line.status !='ab' and line.diff_time > 0">
+                                                <t t-esc="line.diff_time"
+                                                   t-options="{'widget': 'float_time'}"/>
+                                                <t t-set="tot_diff"
+                                                   t-value="tot_diff+line.diff_time"/>
+                                            </t>
+
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-if="line.status =='ab' and line.diff_time > 0">
+
+                                                <t t-esc="line.diff_time"
+                                                   t-options="{'widget': 'float_time'}"/>
+                                                <t t-set="tot_ab"
+                                                   t-value="tot_ab+line.diff_time"/>
+                                                <t t-set="ab_no"
+                                                   t-value="ab_no+1"/>
+                                            </t>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                            <t t-esc="line.ac_sign_out-line.ac_sign_in"
+                                               t-options="{'widget': 'float_time'}"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-if="line.overtime >0">
+                                                <t t-esc="line.overtime"
+                                                   t-options="{'widget': 'float_time'}"/>
+                                            </t>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-if="line.status == 'ab'">
+                                                <t t-esc="'Absence'"/>
+                                            </t>
+                                            <t t-if="line.status == 'weekend'">
+                                                <t t-esc="'Week End'"/>
+                                            </t>
+                                            <t t-if="line.status == 'ph'">
+                                                Public Holiday
+                                            </t>
+                                            <t t-if="line.status == 'leave'">
+                                                Leave
+                                            </t>
+                                            <t t-if="line.note and line.status">
+                                                ,
+                                            </t>
+                                            <t t-if="line.note">
+                                                <t t-esc="line.note"/>
+                                            </t>
+                                        </td>
+                                        <t t-set="tot_late"
+                                           t-value="tot_late+line.late_in"/>
+                                        <t t-set="tot_ot"
+                                           t-value="tot_ot+line.overtime"/>
+
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+                        <div class="row">
+                            <table class="table table-condensed table table-striped"
+                                   width="100%" style=" table-layout:fixed;">
+                                <thead style=" background-color: #3498DB;">
+                                    <tr>
+                                        <th width="30px"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            System Total
+                                        </th>
+                                        <th width="30px"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            Late
+                                        </th>
+                                        <th width="20px"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            EO
+                                        </th>
+                                        <th width="20px"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            ABT
+                                        </th>
+                                        <th width="20px"
+                                            style="border: 1px !important; border-style: solid !important; border-color: #fff; color:#fff !important; ">
+                                            OT
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+
+                                        </td>
+
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="tot_late"
+                                               t-options="{'widget': 'float_time'}"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="tot_diff"
+                                               t-options="{'widget': 'float_time'}"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="ab_no"/>
+                                        </td>
+                                        <td style="border: 1px !important; border-style: solid !important; border-color: #fff !important;">
+                                            <t t-esc="tot_ot"
+                                               t-options="{'widget': 'float_time'}"/>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="row"
+                             style="font-size:14px;text-align:center;background-color: #3498DB; ">
+                            <strong style="color:white">OT=Overtime . ABT=Absence . WO=Working
+                                Hours . EO=Early Out
+
+                            </strong>
+                        </div>
+                    </div>
+                </t>
+
+            </t>
+        </template>
+
+
+        <template id="attendance_sheet_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="gs_att_sheet_report.print_att_sheet"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

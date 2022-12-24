@@ -1,0 +1,102 @@
+.o_hr_attendance_kiosk_mode_container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    align-items: center;
+    position: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.o_hr_attendance_kiosk_mode_container h1, .h1 {
+    font-size: 2.16666667rem;
+}
+.o_hr_attendance_kiosk_mode_container h3, .h3 {
+    font-size: 1.40833333rem;
+}
+.o_hr_attendance_kiosk_backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.o_hr_attendance_kiosk_mode {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 1.25rem;
+}
+
+.o_hr_attendance_kiosk_mode .o_hr_attendance_user_badge {
+    background: linear-gradient(to right bottom, #77717e, #c9a8a9);
+}
+
+.o_hr_attendance_kiosk_mode .o_hr_attendance_user_badge img {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 1px solid #d7d7d7;
+}
+
+.o_hr_attendance_kiosk_mode .o_hr_attendance_sign_in_out_icon {
+    cursor: pointer;
+    margin: 0.1em 0 0.1em;
+    padding: 0.15em 0.3em;
+    border-radius: 0.1em;
+    box-shadow: inset 0 -3px 0 rgb(0 0 0 / 30%);
+}
+
+.fa-4x {
+    font-size: 4em;
+}
+.videoSource{
+    min-width: 100%;
+}
+
+@media (min-width: 768px){
+    .o_hr_attendance_kiosk_mode_container {
+        justify-content: center;
+        min-height: 150px;
+    }
+
+    .o_hr_attendance_kiosk_mode {
+        width: auto;
+        max-width: 550px;
+        width: 100%;
+        border-radius: 0.2em;
+        font-size: 1.2em;
+        animation: fadeInDownSmall .3s;
+    }
+
+    .o_hr_attendance_kiosk_mode .o_hr_attendance_user_badge {
+        margin: 0;
+        height: 90px;
+        border-radius: 0.2em 0.2em 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        position: inherit;
+        top: 0;
+        left: 0;
+        bottom: 100%;
+        right: 0;
+        transform: translateY(0px);
+    }
+
+    .o_hr_attendance_kiosk_mode .o_hr_attendance_user_badge img {
+        width: 80px;
+        height: 80px;
+        transform: translateX(5%) translateY(7%);
+        top: auto;
+        left: auto;
+        bottom: 0;
+        right: auto;
+    }
+
+}

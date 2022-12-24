@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<odoo>
+	<data>
+<!--		<template id="assets" inherit_id="point_of_sale.assets">
+			<xpath expr="." position="inside">
+				<script type="text/javascript" src="/pos_custom_discounts/static/src/js/main.js"></script>
+				<link rel="stylesheet" href="/pos_custom_discounts/static/src/css/pos_custom_discounts.css" />
+			</xpath>
+		</template>-->
+
+		<record id="pos_custom_discounts.pos_custom_discounts1" model="ir.asset">
+            <field name="name">pos_custom_discounts1</field>
+            <field name="bundle">point_of_sale.assets</field>
+			<field name="path">/pos_custom_discounts/static/src/js/main.js</field>
+		</record>
+		<record id="pos_custom_discounts.pos_custom_discounts2" model="ir.asset">
+            <field name="name">pos_custom_discounts2</field>
+            <field name="bundle">point_of_sale.assets</field>
+			<field name="path">/pos_custom_discounts/static/src/css/pos_custom_discounts.css</field>
+		</record>
+	</data>
+</odoo>

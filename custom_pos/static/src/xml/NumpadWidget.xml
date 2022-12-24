@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- hide disc button which apply discount to each order line -->
+<templates id="inherit_template_1" xml:space="preserve">
+    <t t-name="CustomNumberPopup" t-inherit="point_of_sale.NumpadWidget" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('numpad')]" position="replace">
+            <div class="numpad">
+            <button class="input-button number-char" t-on-click="sendInput('1')">1</button>
+            <button class="input-button number-char" t-on-click="sendInput('2')">2</button>
+            <button class="input-button number-char" t-on-click="sendInput('3')">3</button>
+            <button class="mode-button" t-att-class="{'selected-mode': props.activeMode === 'quantity'}"
+                    t-on-click="changeMode('quantity')">Qty</button>
+            <br />
+            <button class="input-button number-char" t-on-click="sendInput('4')">4</button>
+            <button class="input-button number-char" t-on-click="sendInput('5')">5</button>
+            <button class="input-button number-char" t-on-click="sendInput('6')">6</button>
+            <button class="mode-button"></button>
+            <br />
+            <button class="input-button number-char" t-on-click="sendInput('7')">7</button>
+            <button class="input-button number-char" t-on-click="sendInput('8')">8</button>
+            <button class="input-button number-char" t-on-click="sendInput('9')">9</button>
+            <button class="mode-button" t-att-class="{
+                    'selected-mode': props.activeMode === 'price',
+                    'disabled-mode': !hasPriceControlRights
+                }" t-att-disabled="!hasPriceControlRights"
+                    t-on-click="changeMode('price')">Price</button>
+            <br />
+            <button class="input-button numpad-minus" t-on-click="sendInput('-')">+/-</button>
+            <button class="input-button number-char" t-on-click="sendInput('0')">0</button>
+            <button class="input-button number-char" t-on-click="sendInput(decimalSeparator)">
+                <t t-esc="decimalSeparator" />
+            </button>
+            <button class="input-button numpad-backspace" t-on-click="sendInput('Backspace')">
+                <img style="pointer-events: none;" src="/point_of_sale/static/src/img/backspace.png"
+                     width="24" height="21" alt="Backspace" />
+            </button>
+        </div>
+        </xpath>
+    </t>
+</templates>

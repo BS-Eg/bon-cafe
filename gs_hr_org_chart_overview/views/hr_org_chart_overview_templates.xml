@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<!--    <template id="assets_backend" name="gs_hr_org_chart_overview assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/gs_hr_org_chart_overview/static/src/js/hr_org_chart_overview.js"/>
+            <script type="text/javascript" src="/gs_hr_org_chart_overview/static/src/lib/orgchart/html2canvas.min.js"/>
+            <script type="text/javascript" src="/gs_hr_org_chart_overview/static/src/lib/orgchart/jspdf.min.js"/>
+            <script type="text/javascript" src="/gs_hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.js"/>
+            <link rel="stylesheet" type="text/css" href="/gs_hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.css"/>
+            <link rel="stylesheet" type="text/scss" href="/gs_hr_org_chart_overview/static/src/scss/hr_org_chart_style.scss"/>
+        </xpath>
+    </template>-->
+
+    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview01" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview01</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/js/hr_org_chart_overview.js</field>
+    </record>
+    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview02" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview02</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/lib/orgchart/html2canvas.min.js</field>
+    </record>
+    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview03" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview03</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/lib/orgchart/jspdf.min.js</field>
+    </record>
+    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview04" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview04</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.js</field>
+    </record>
+
+<!--    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview05" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview05</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/lib/orgchart/jquery.orgchart.css</field>
+    </record>-->
+
+    <record id="gs_hr_org_chart_overview.assets_hr_org_chart_overview06" model="ir.asset">
+        <field name="name">assets_hr_org_chart_overview06</field>
+        <field name="bundle">web.assets_backend</field>
+        <field name="path">/gs_hr_org_chart_overview/static/src/scss/hr_org_chart_style.scss</field>
+    </record>
+</odoo>

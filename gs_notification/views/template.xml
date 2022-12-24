@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <template id="assets_backend" name="gs_notification assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+		        <link rel="stylesheet" href="/gs_notification/static/src/core.css"/>
+                <script type="text/javascript" src="/gs_notification/static/src/js/tree_header_extend.js"></script>
+            </xpath>
+        </template>-->
+
+        <record id="gs_notification.assets_gs_notification01" model="ir.asset">
+            <field name="name">assets_gs_notification01</field>
+            <field name="bundle">web.assets_backend</field>
+            <field name="path">/gs_notification/static/src/core.css</field>
+        </record>
+        <record id="gs_notification.assets_gs_notification02" model="ir.asset">
+            <field name="name">assets_gs_notification02</field>
+            <field name="bundle">web.assets_backend</field>
+            <field name="path">/gs_notification/static/src/js/tree_header_extend.js</field>
+        </record>
+    </data>
+</odoo>

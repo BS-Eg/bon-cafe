@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_menu_hr_attendances" name="Portal layout : hr attendances menu entries" inherit_id="portal.portal_breadcrumbs" priority="23">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'hr_attendances' or hr_attendance" t-attf-class="breadcrumb-item #{'active ' if not hr_attendance else ''}">
+                <a t-if="hr_attendance" t-attf-href="/my/hr_attendances?{{ keep_query() }}">Attendances</a>
+                <t t-else="">Attendances</t>
+            </li>
+
+            <li t-if="hr_attendance" class="breadcrumb-item active">
+                <span t-field="hr_attendance.employee_id.name"/>
+            </li>
+
+            <li t-if="page_name == 'create_new_attendance' or create_new_attendance" t-attf-class="breadcrumb-item #{'active ' if not hr_attendance else ''}">
+                <a t-attf-href="/my/hr_attendances?{{ keep_query() }}">Attendances</a>
+                <li class="breadcrumb-item">
+                    <span>Check In or Check Out</span>
+                </li>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_hr_attendances" name="Show Attendances" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Attendances</t>
+                <t t-set="url" t-value="'/my/hr_attendances'"/>
+                <t t-set="placeholder_count" t-value="'hr_attendance_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_hr_attendances" name="My Attendances">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">HR Attendances</t>
+                <div class="form-inline ml-lg-4" t-if="request.env.user.employee_id">
+                    <a class="btn btn-primary btn-sm" name='create_new_hr_attendance' title="Create New Attendance" href="/my/hr_attendances/create_new">
+                        <i class="fa fa-sign-in"/> Create New
+                    </a>
+                </div>
+            </t>
+
+            <t t-if="not hr_attendances">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are currently no HR Attendances for your account.
+                </div>
+            </t>
+
+            <t t-if="hr_attendances" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Attendance #</th>
+                        <th class="text-left">Check In</th>
+                        <th class="text-left">Check Out</th>
+                        <th class="text-left">Check In Photo</th>
+                        <th class="text-left">Check Out Photo</th>                        
+                        <th class="text-left">Check In Map</th>
+                        <th class="text-left">Check Out Map</th>
+                    </tr>
+                </thead>
+                <t t-foreach="hr_attendances" t-as="attendance">
+                    <tr>
+                        <td>
+                            <a t-att-href="attendance.get_portal_url()">
+                                <t t-esc="attendance.employee_id.name"/>
+                            </a>
+                        </td>
+                        <td class="text-left">
+                            <span t-field="attendance.check_in"/>
+                        </td>
+                        <td class="text-left">
+                            <span t-field="attendance.check_out"/>
+                        </td>
+                        <td class="text-left">
+                            <t t-if="attendance.check_in_photo">
+                                <img t-att-src="image_data_uri(attendance.check_in_photo)" style="max-height: 40px; max-width: 40px;"/>
+                            </t> 
+                        </td>
+                        <td class="text-left">
+                            <t t-if="attendance.check_out_photo">
+                                <img t-att-src="image_data_uri(attendance.check_out_photo)" style="max-height: 40px; max-width: 40px;"/>
+                            </t> 
+                        </td>
+                        <td class="text-left">
+                            <t t-set="map_in_link" t-value="attendance.check_out_map_link"/>
+                            <span t-if="map_in_link">
+                                <a t-att-href="map_in_link" target="_blank"><span t-esc="map_in_link"/></a>
+                            </span> 
+                        </td>
+                        <td class="text-left">
+                            <t t-set="map_out_link" t-value="attendance.check_out_map_link"/>
+                            <span t-if="map_out_link">
+                                <a t-att-href="map_out_link" target="_blank"><span t-esc="map_out_link"/></a>
+                            </span> 
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_hr_attendance" name="My Attendances">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_record_layout">
+
+                <t t-set="card_header">
+                    <div class="row no-gutters">
+                        <div class="col-12">
+                            <h5 class="d-flex mb-1 mb-md-0 row">
+                                <span t-field="hr_attendance.employee_id.name" class="col-9  col-md-9 text-truncate"/>
+                                <small class="col-1 col-md-1 text-muted d-none d-md-inline mt-1"> (#<span t-field="hr_attendance.id"/>)</small>
+                            </h5>
+                        </div>
+                    </div>
+                </t>
+
+                <t t-set="card_body">
+                    <div class="row mb-4">
+                        <div class="col-9 col-md-9 mb-1">
+                            <strong>Create Date:</strong>
+                            <span t-field="hr_attendance.create_date" t-options='{"widget": "date"}'/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6 pb-2">
+                            <strong>Employee</strong>
+                            <div class="row">
+                                <div class="col flex-grow-0 pr-3">
+                                    <img t-if="hr_attendance.employee_id.image_1024" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(hr_attendance.employee_id.image_1024)" alt="Contact"/>
+                                    <img t-else="" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                </div>
+                                <div class="col pl-md-0">
+                                    <div t-field="hr_attendance.employee_id.name"/>
+                                    <div t-if="hr_attendance.employee_id.work_email">
+                                        <i class="fa fa-phone fa-fw" role="img" aria-label="Phone" title="Phone"></i>
+                                        <span t-field="hr_attendance.employee_id.work_email"/>
+                                    </div>
+                                    <div t-if="hr_attendance.employee_id.work_phone">
+                                        <i class="fa fa-envelope fa-fw" role="img" aria-label="Phone" title="Phone"></i>
+                                        <span t-field="hr_attendance.employee_id.work_phone"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-12 col-md-12 mb-1">
+                            <strong>Check In:</strong>
+                            <span t-field="hr_attendance.check_in"/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1">
+                        <div class="col-12 col-md-12 mb-1">
+                            <strong>Check Out:</strong>
+                            <span t-field="hr_attendance.check_in"/>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-12 col-md-12 mb-1">
+                            <strong>Worked Hours:</strong>
+                            <span t-field="hr_attendance.worked_hours"/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1 mt8">
+                        <div class="col-6 col-md-6 pb-2">
+                            <h4>Check-in Location</h4>
+                            <div class="row">
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-in Latitude:</strong>
+                                    <span t-field="hr_attendance.check_in_latitude"/>
+                                </div>
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-in Longitude:</strong>
+                                    <span t-field="hr_attendance.check_in_longitude"/>
+                                </div>     
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-in Map:</strong>
+                                    <t t-set="map_in_link" t-value="hr_attendance.check_in_map_link"/>
+                                    <span t-if="map_in_link">
+                                        <a t-att-href="map_in_link" target="_blank"><span t-esc="map_in_link"/></a>
+                                    </span> 
+                                </div>                            
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 pb-2">
+                            <h4>Check-Out Location</h4>
+                            <div class="row">
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-out  Latitude:</strong>
+                                    <span t-field="hr_attendance.check_out_latitude"/>
+                                </div>
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-out  Longitude:</strong>
+                                    <span t-field="hr_attendance.check_out_longitude"/>
+                                </div>
+                                <div class="col-12 col-md-12 mb-1">
+                                    <strong>Check-out Map:</strong>
+                                    <t t-set="map_out_link" t-value="hr_attendance.check_out_map_link"/>
+                                    <span t-if="map_out_link">
+                                        <a t-att-href="map_out_link" target="_blank"><span t-esc="map_out_link"/></a>
+                                    </span> 
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-1 mt8">
+                        <div class="col-6 col-md-6 pb-2">
+                            <h4>Check-in Photo</h4>
+                            <div class="row">
+                                <div class="col-12 col-md-12 mb-1">     
+                                    <t t-if="hr_attendance.check_in_photo">
+                                        <img t-att-src="image_data_uri(hr_attendance.check_in_photo)" style="max-height: 6rem; max-width: 100%;"/>
+                                    </t>                                                       
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 pb-2">
+                            <h4>Check-out Photo</h4>
+                            <div class="row">
+                                <div class="col-12 col-md-12 mb-1">     
+                                    <t t-if="hr_attendance.check_out_photo">
+                                        <img t-att-src="image_data_uri(hr_attendance.check_out_photo)" style="max-height: 6rem; max-width: 100%;"/>
+                                    </t>                                                       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </t>
+            </t>
+            <!-- chatter -->
+            <div id="leave_communication" class="mt-4">
+                <h4>
+                    <strong>Message and communication history</strong>
+                </h4>
+                <t t-call="portal.message_thread">
+                    <t t-set="object" t-value="hr_attendance"/>
+                </t>
+            </div>
+
+        </t>
+    </template>
+
+    <template id="my_attendance_create_new" name="Create New Attendance">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_body">
+                    <div class="o_summary">
+                        <div class="o_hr_attendance_kiosk_mode_container o_home_menu_background">
+                            <span class="o_hr_attendance_kiosk_backdrop"/>
+                            <div class="o_hr_attendance_kiosk_mode">
+                                <t t-if="employee">
+                                    <input t-if="employee" type="hidden" id="employee_input" 
+                                        t-att-data-employee_id="employee.id"
+                                        t-att-data-company_id="employee.company_id.id"
+                                        t-att-data-user_id="employee.user_id.id"
+                                        t-att-data-portal_attendance_geolocation="employee.company_id.portal_attendance_geolocation"
+                                        t-att-data-portal_attendance_geofence="employee.company_id.portal_attendance_geofence"
+                                        t-att-data-portal_attendance_photo="employee.company_id.portal_attendance_photo"
+                                        />
+                                    <div class="o_hr_attendance_user_badge o_home_menu_background">
+                                        <img class="img rounded-circle" t-attf-src="/web/image?model=hr.employee.public&amp;field=image_128&amp;id=#{employee.id}"/>
+                                    </div>
+                                    <h1 class="mt8 mb8"><span t-field="employee.name"/></h1>
+                                    <h3 class="mt8 mb8">
+                                        <span class="kiosk_message"></span>
+                                    </h3>
+                                    <h4 class="mt0 mb0 text-muted hours_today">
+                                        Today's work hours: <span></span>
+                                    </h4>
+                                    
+                                    <a class="fa fa-4x o_hr_attendance_sign_in_out_icon fa-sign-out btn-warning hr_attendance_sign_out_icon" style="display:none" aria-label="Sign out" title="Sign out"/>
+                                    <a class="fa fa-4x o_hr_attendance_sign_in_out_icon fa-sign-in btn-secondary hr_attendance_sign_in_icon" style="display:none" aria-label="Sign in" title="Sign in"/>
+
+                                    <h3 class="mt0 mb32 text-muted">
+                                        Click to 
+                                        <b class="hr_attendance_sign_out_text" style="display:none">check out</b>
+                                        <b class="hr_attendance_sign_in_text" style="display:none">check in</b>
+                                    </h3>
+
+                                   
+                                    <div class="gmap_kisok_container mb8" id="gmap_kisok" style="display: none;">
+                                        <i class="fa fa-1x fa-angle-double-down gmap_kisok_toggle" id="gmap_kisok_toggle">
+                                            Google Map Location
+                                        </i>                                        
+                                        <div class="gmap_kisok_view" style="display: none;"></div>
+                                    </div>                                    
+                                </t>
+                                <div t-else="" class="alert alert-danger mt8 ml8 mr8 mb8" role="alert">
+                                    <b>Error: could not find corresponding employee.</b><br/>Please return to the main menu.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

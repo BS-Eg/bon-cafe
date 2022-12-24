@@ -1,0 +1,43 @@
+<odoo>
+<!--    <template id="pos_loyalty_assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/db.js"/>
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/loyalty.js"/>
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/client.js"/>
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/RewardButton.js"/>
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/PointsCounter.js"/>
+            <script type="text/javascript" src="/gs_pos_loyalty/static/src/js/AbstractReceiptScreen.js"/>
+        </xpath>
+    </template>-->
+
+    <record id="gs_pos_loyalty.pos_loyalty_assets1" model="ir.asset">
+        <field name="name">pos_loyalty_assets1</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/db.js</field>
+    </record>
+    <record id="gs_pos_loyalty.pos_loyalty_assets2" model="ir.asset">
+        <field name="name">pos_loyalty_assets2</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/loyalty.js</field>
+    </record>
+    <record id="gs_pos_loyalty.pos_loyalty_assets3" model="ir.asset">
+        <field name="name">pos_loyalty_assets3</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/client.js</field>
+    </record>
+    <record id="gs_pos_loyalty.pos_loyalty_assets4" model="ir.asset">
+        <field name="name">pos_loyalty_assets4</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/RewardButton.js</field>
+    </record>
+    <record id="gs_pos_loyalty.pos_loyalty_assets5" model="ir.asset">
+        <field name="name">pos_loyalty_assets5</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/PointsCounter.js</field>
+    </record>
+    <record id="gs_pos_loyalty.pos_loyalty_assets6" model="ir.asset">
+        <field name="name">pos_loyalty_assets6</field>
+        <field name="bundle">point_of_sale.assets</field>
+        <field name="path">/gs_pos_loyalty/static/src/js/AbstractReceiptScreen.js</field>
+    </record>
+</odoo>

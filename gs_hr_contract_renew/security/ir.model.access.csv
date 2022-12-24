@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_contract_renew,hr_contract_renew,model_hr_contract_renew,base.group_user,1,1,1,1
+access_set_renew_wizard,set_renew_wizard,model_set_renew_wizard,,1,1,1,1

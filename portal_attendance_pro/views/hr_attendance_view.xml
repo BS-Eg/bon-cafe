@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+
+    <record id="hr_attendance_view_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='check_in']" position="after">
+                <field name="check_in_photo" widget="image" class="oe_avatar w-25"/>
+                <field name="check_in_latitude" invisible="1"/>
+                <field name="check_in_longitude" invisible="1"/> 
+                <field name="check_in_map_link" widget="url" options="{'button_name':'Geolocation'}"
+                    attrs="{'invisible': ['|',('check_in_latitude', '=', '0.0000000'),('check_in_longitude', '=', '0.0000000')]}"/>       
+            </xpath>
+            <xpath expr="//field[@name='check_out']" position="after">
+                <field name="check_out_photo" widget="image" class="oe_avatar w-25"/>
+                <field name="check_out_latitude" invisible="1"/>
+                <field name="check_out_longitude" invisible="1"/> 
+                <field name="check_out_map_link" widget="url" options="{'button_name':'Geolocation'}"
+                    attrs="{'invisible': ['|',('check_out_latitude', '=', '0.0000000'),('check_out_longitude', '=', '0.0000000')]}"/>  
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_attendance_view_form_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.form.inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"></field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="after">
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </xpath>
+            <xpath expr="//form/sheet/group" position="before">   
+                <div class="oe_button_box" name="button_box">             
+                    <button name="preview_hr_attendance"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-globe icon" groups="hr_attendance.group_hr_attendance_manager">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Customer</span>
+                            <span class="o_stat_text">Preview</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//form/sheet/group" position="after">
+                <group name="locations" string="Check-in Location">
+                    <group>
+                        <field name="check_in_latitude" nolabel="0"/>
+                        <field name="check_in_longitude" nolabel="0"/> 
+                        <field name="check_in_map_link" nolabel="0" 
+                            widget="url" options="{'button_name':'Geolocation'}"
+                            attrs="{'invisible': ['|',('check_in_latitude', '=', '0.0000000'),('check_in_longitude', '=', '0.0000000')]}"/>
+                        <field name="check_in_geofence_ids" nolabel="0" 
+                            widget="many2many_tags" options="{'no_create': True}" readonly="1"/>
+                    </group>
+                </group>
+                <group name="locations" string="Check-ou Location">
+                    <group>
+                        <field name="check_out_latitude" nolabel="0"/>
+                        <field name="check_out_latitude" nolabel="0"/>
+                        <field name="check_out_map_link" nolabel="0"
+                            widget="url" options="{'button_name':'Geolocation'}"
+                            attrs="{'invisible': ['|',('check_out_latitude', '=', 0.0000000),('check_out_latitude', '=', 0.0000000)]}"/>
+                        <field name="check_out_geofence_ids" nolabel="0" 
+                            widget="many2many_tags" options="{'no_create': True}" readonly="1"/>                     
+                    </group>
+                </group>  
+                <group name="locations" col="4">
+                    <label for="check_in_photo" string="Check-in Photo"/>
+                    <span class="oe_inline">
+                       <field name="check_in_photo" widget="image" nolabel="1"/><br/>
+                    </span>
+
+                    <label for="check_out_photo" string="Check-out Photo"/>
+                    <span class="oe_inline">
+                        <field name="check_out_photo" widget="image" nolabel="1"/><br/>                    
+                    </span>
+                </group>             
+            </xpath> 
+        </field>
+    </record>
+
+    </data>
+</odoo>

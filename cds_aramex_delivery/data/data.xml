@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="product.product" id="cds_product_aramex_delivery">
+            <field name="name">Aramex Delivery</field>
+            <field name="barcode">Aramex</field>
+            <field name="type">service</field>
+            <field name="type">service</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+            <field name="invoice_policy">order</field>
+        </record>
+
+        <record model="delivery.carrier" id="cds_aramex_delivery_method">
+            <field name="name">Aramex Delivery</field>
+            <field name="delivery_type">aramex</field>
+            <field name="product_id" ref="cds_aramex_delivery.cds_product_aramex_delivery"/>
+            <field name="aramex_account_country">EG</field>
+            <field name="aramex_product_type">CDS</field>
+            <field name="aramex_payment_type">P</field>
+            <field name="aramex_product_group">DOM</field>
+
+
+        </record>
+
+
+    </data>
+</odoo>

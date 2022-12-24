@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="eg_aramex_001" model="res.city">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">10Th Of Ramadan City</field>
+        </record>
+        <record id="eg_aramex_002" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">15 Of May City</field>
+        </record>
+        <record id="eg_aramex_003" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Abasya</field>
+        </record>
+        <record id="eg_aramex_004" model="res.city">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Abo Rawash</field>
+        </record>
+        <record id="eg_aramex_005" model="res.city">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">ABOU SOMBO</field>
+        </record>
+        <record id="eg_aramex_006" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Abu Zaabal</field>
+        </record>
+        <record id="eg_aramex_007" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Agouza</field>
+        </record>
+        <record id="eg_aramex_008" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ain Shams</field>
+        </record>
+        <record id="eg_aramex_009" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Arish</field>
+        </record>
+        <record id="eg_aramex_0010" model="res.city">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Alexandria</field>
+        </record>
+        <record id="eg_aramex_0011" model="res.city">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Alex Desert Rd.</field>
+        </record>
+        <record id="eg_aramex_0012" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Haram</field>
+        </record>
+        <record id="eg_aramex_0013" model="res.city">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Mahala</field>
+        </record>
+        <record id="eg_aramex_0014" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Marg</field>
+        </record>
+        <record id="eg_aramex_0015" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Matarya</field>
+        </record>
+        <record id="eg_aramex_0016" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Monib</field>
+        </record>
+        <record id="eg_aramex_0017" model="res.city">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Nobariah</field>
+        </record>
+        <record id="eg_aramex_0018" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Obour City</field>
+        </record>
+        <record id="eg_aramex_0019" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">AL Qanater</field>
+        </record>
+        <record id="eg_aramex_0021" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Tour City</field>
+        </record>
+        <record id="eg_aramex_0022" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Wahat</field>
+        </record>
+        <record id="eg_aramex_0023" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Al Waraq</field>
+        </record>
+        <record id="eg_aramex_0024" model="res.city">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Assiut</field>
+        </record>
+        <record id="eg_aramex_0025" model="res.city">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Aswan</field>
+        </record>
+        <record id="eg_aramex_0026" model="res.city">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Atfeah</field>
+        </record>
+        <record id="eg_aramex_0027" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Attaba</field>
+        </record>
+        <record id="eg_aramex_0028" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Badrashin</field>
+        </record>
+        <record id="eg_aramex_0029" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Badr City</field>
+        </record>
+        <record id="eg_aramex_0030" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Bahtem</field>
+        </record>
+        <record id="eg_aramex_0031" model="res.city">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Bani Swif</field>
+        </record>
+        <record id="eg_aramex_0032" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Beigam</field>
+        </record>
+        <record id="eg_aramex_0033" model="res.city">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Belbis</field>
+        </record>
+        <record id="eg_aramex_0034" model="res.city">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Belqas</field>
+        </record>
+        <record id="eg_aramex_0035" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Benha</field>
+        </record>
+        <record id="eg_aramex_0036" model="res.city">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Berkeit Sabb</field>
+        </record>
+        <record id="eg_aramex_0037" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Bolak El Dakrour</field>
+        </record>
+        <record id="eg_aramex_0038" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Cairo Suez Desert Rd</field>
+        </record>
+        <record id="eg_aramex_0039" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Cornish El Nile</field>
+        </record>
+        <record id="eg_aramex_0040" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Dahab City</field>
+        </record>
+        <record id="eg_aramex_0041" model="res.city">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Dahshour</field>
+        </record>
+        <record id="eg_aramex_0042" model="res.city">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Damanhour</field>
+        </record>
+        <record id="eg_aramex_0043" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Dar El Salam</field>
+        </record>
+        <record id="eg_aramex_0044" model="res.city">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Desouk</field>
+        </record>
+        <record id="eg_aramex_0045" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Dokki</field>
+        </record>
+        <record id="eg_aramex_0046" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Down Town</field>
+        </record>
+        <record id="eg_aramex_0047" model="res.city">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Dumiatta</field>
+        </record>
+        <record id="eg_aramex_0048" model="res.city">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ein Al Sukhna</field>
+        </record>
+        <record id="eg_aramex_0049" model="res.city">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Ayat</field>
+        </record>
+        <record id="eg_aramex_0050" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">EL GOUNA</field>
+        </record>
+        <record id="eg_aramex_0051" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Hawamdiah</field>
+        </record>
+        <record id="eg_aramex_0052" model="res.city">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">EL Korimat</field>
+        </record>
+        <record id="eg_aramex_0053" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Marg</field>
+        </record>
+        <record id="eg_aramex_0054" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Qantara Sharq</field>
+        </record>
+        <record id="eg_aramex_0055" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">EL rehab</field>
+        </record>
+        <record id="eg_aramex_0056" model="res.city">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Saf</field>
+        </record>
+        <record id="eg_aramex_0057" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Salam City</field>
+        </record>
+        <record id="eg_aramex_0058" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">EL SAWAH</field>
+        </record>
+        <record id="eg_aramex_0059" model="res.city">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Wadi El Gadid</field>
+        </record>
+        <record id="eg_aramex_0060" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">El Zeitoun</field>
+        </record>
+        <record id="eg_aramex_0061" model="res.city">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Fayid</field>
+        </record>
+        <record id="eg_aramex_0062" model="res.city">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Fayoum</field>
+        </record>
+        <record id="eg_aramex_0063" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Garden City</field>
+        </record>
+        <record id="eg_aramex_0064" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ghamrah</field>
+        </record>
+        <record id="eg_aramex_0065" model="res.city">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Giza</field>
+        </record>
+        <record id="eg_aramex_0066" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Hadayek El Qobah</field>
+        </record>
+        <record id="eg_aramex_0067" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Heliopolis</field>
+        </record>
+        <record id="eg_aramex_0068" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Helwan</field>
+        </record>
+        <record id="eg_aramex_0069" model="res.city">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">High Dam</field>
+        </record>
+        <record id="eg_aramex_0070" model="res.city">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Hurghada</field>
+        </record>
+        <record id="eg_aramex_0071" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Imbaba</field>
+        </record>
+        <record id="eg_aramex_0072" model="res.city">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Inshas</field>
+        </record>
+        <record id="eg_aramex_0073" model="res.city">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ismailia</field>
+        </record>
+        <record id="eg_aramex_0074" model="res.city">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Kafr Al Sheikh</field>
+        </record>
+        <record id="eg_aramex_0075" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Kaha</field>
+        </record>
+        <record id="eg_aramex_0076" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Kasr El Einy</field>
+        </record>
+        <record id="eg_aramex_0077" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Khanka</field>
+        </record>
+        <record id="eg_aramex_0078" model="res.city">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Luxour</field>
+        </record>
+        <record id="eg_aramex_0079" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Maadi</field>
+        </record>
+        <record id="eg_aramex_0080" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Madinaty</field>
+        </record>
+        <record id="eg_aramex_0081" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Manial El Rodah</field>
+        </record>
+        <record id="eg_aramex_0082" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Mansheyt Naser</field>
+        </record>
+        <record id="eg_aramex_0083" model="res.city">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Mansoura</field>
+        </record>
+        <record id="eg_aramex_0084" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Marabella</field>
+        </record>
+        <record id="eg_aramex_0085" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Maraqia</field>
+        </record>
+        <record id="eg_aramex_0086" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Marinah</field>
+        </record>
+        <record id="eg_aramex_0087" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Marsa Alam</field>
+        </record>
+        <record id="eg_aramex_0088" model="res.city">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Marsa Matrouh</field>
+        </record>
+        <record id="eg_aramex_0089" model="res.city">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Meet Ghamr</field>
+        </record>
+        <record id="eg_aramex_0090" model="res.city">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Menia City</field>
+        </record>
+        <record id="eg_aramex_0091" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Mohandiseen</field>
+        </record>
+        <record id="eg_aramex_0092" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Mokattam</field>
+        </record>
+        <record id="eg_aramex_0093" model="res.city">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Monufia</field>
+        </record>
+        <record id="eg_aramex_0094" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Moustorod</field>
+        </record>
+        <record id="eg_aramex_0095" model="res.city">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Nag Hamadi</field>
+        </record>
+        <record id="eg_aramex_0096" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Nasr City</field>
+        </record>
+        <record id="eg_aramex_0097" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">New Cairo</field>
+        </record>
+        <record id="eg_aramex_0098" model="res.city">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">New Salhia</field>
+        </record>
+        <record id="eg_aramex_0099" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Nuwibaa</field>
+        </record>
+        <record id="eg_aramex_00100" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">October City</field>
+        </record>
+        <record id="eg_aramex_00101" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Omranya</field>
+        </record>
+        <record id="eg_aramex_00102" model="res.city">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Port Said</field>
+        </record>
+        <record id="eg_aramex_00103" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Qalioub</field>
+        </record>
+        <record id="eg_aramex_00104" model="res.city">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Qaliubia</field>
+        </record>
+        <record id="eg_aramex_00105" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Qaliubia</field>
+        </record>
+        <record id="eg_aramex_00106" model="res.city">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Qena</field>
+        </record>
+        <record id="eg_aramex_00107" model="res.city">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Quesna</field>
+        </record>
+        <record id="eg_aramex_00108" model="res.city">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Rafah</field>
+        </record>
+        <record id="eg_aramex_00109" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ramsis</field>
+        </record>
+        <record id="eg_aramex_00110" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">RAS GHAREB</field>
+        </record>
+        <record id="eg_aramex_00111" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ras Seidr</field>
+        </record>
+        <record id="eg_aramex_00112" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Ras Shoqeir</field>
+        </record>
+        <record id="eg_aramex_00113" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Sadat City</field>
+        </record>
+        <record id="eg_aramex_00114" model="res.city">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Safaga</field>
+        </record>
+        <record id="eg_aramex_00115" model="res.city">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Saqara</field>
+        </record>
+        <record id="eg_aramex_00116" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Sedi Kreir</field>
+        </record>
+        <record id="eg_aramex_00117" model="res.city">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Sharm El Sheikh</field>
+        </record>
+        <record id="eg_aramex_00118" model="res.city">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Shebin El Koum</field>
+        </record>
+        <record id="eg_aramex_00119" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Shubra</field>
+        </record>
+        <record id="eg_aramex_00120" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Shubra El Kheima</field>
+        </record>
+        <record id="eg_aramex_00121" model="res.city">
+
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Siwa</field>
+        </record>
+        <record id="eg_aramex_00122" model="res.city">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">sohag City</field>
+        </record>
+        <record id="eg_aramex_00123" model="res.city">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Suez</field>
+        </record>
+        <record id="eg_aramex_00124" model="res.city">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Taba City</field>
+        </record>
+        <record id="eg_aramex_00125" model="res.city">
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">talkha</field>
+        </record>
+        <record id="eg_aramex_00126" model="res.city">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Tanta</field>
+        </record>
+        <record id="eg_aramex_00127" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Tebin</field>
+        </record>
+        <record id="eg_aramex_00128" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Torah</field>
+        </record>
+        <record id="eg_aramex_00129" model="res.city">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Toshka</field>
+        </record>
+        <record id="eg_aramex_00130" model="res.city">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Wadi El Natroun</field>
+        </record>
+        <record id="eg_aramex_00131" model="res.city">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Zakazik</field>
+        </record>
+        <record id="eg_aramex_00132" model="res.city">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="country_id" ref="base.eg"/>
+            <field name="name">Zamalek</field>
+        </record>
+
+
+    </data>
+</odoo>

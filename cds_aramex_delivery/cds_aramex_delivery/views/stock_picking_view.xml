@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_picking_view_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id"
+                   ref="delivery.view_picking_withcarrier_out_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='carrier_id']" position="after">
+
+                    <field name="aramex_label_url" readonly="1" widget="url"
+                           attrs="{'invisible':['|',('delivery_type','!=','aramex'),('carrier_tracking_ref','=',False)]}"/>
+                </xpath>
+                <xpath expr="//button[@name='send_to_shipper']"
+                       position="replace">
+                    <button name="send_to_shipper" string="Send to Shipper"
+                            type="object"
+                            attrs="{'invisible':['|','|','|','|',('carrier_tracking_ref','!=',False),('delivery_type','in', ['fixed', 'base_on_rule']),('delivery_type','=',False),('state','not in',('done','confirmed','assigned')),('picking_type_code', 'in', ['incoming','internal'])]}"
+                            data-hotkey="shift+v"/>
+
+                </xpath>
+
+
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

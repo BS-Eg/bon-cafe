@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="foodics_connector_list_view" model="ir.ui.view">
+        <field name="name">foodics.connector.list.view</field>
+        <field name="model">foodics.connector</field>
+        <field name="arch" type="xml">
+            <tree string="Foodics Connector">
+                <field name="name"/>
+                <field name="import_option"/>
+                <field name="data_access_url"/>
+                <field name="order_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="foodics_connector_form_view" model="ir.ui.view">
+        <field name="name">foodics.connector.form.view</field>
+        <field name="model">foodics.connector</field>
+        <field name="arch" type="xml">
+            <form string="Foodics Connector">
+                <header>
+                    <button type='object' string='Sync Branches' name='get_branches' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'branches')]}"/>
+                    <button type='object' string='Sync Payment Methods' name='get_payment_methods' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'payment_methods')]}"/>
+                    <button type='object' string='Sync Categories' name='get_categories_methods' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'categories')]}"/>
+                    <button type='object' string='Sync Products' name='get_products_methods' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'products')]}"/>
+                    <button type='object' string='Sync Products Modifiers' name='get_products_methods' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'product_modifiers')]}"/>
+                    <button type='object' string='Sync Orders' name='get_orders_methods' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'orders')]}"/>
+                    
+                    <!-- <button type='object' string='Sync Categories' name='get_product_categories' class='oe_highlight' context="{'types': 'categories'}" attrs="{'invisible': [('import_option', '!=', 'categories')]}"/>
+                    
+                    <button type='object' string='Sync Collection' name='get_orders' class='oe_highlight' context="{'types': 'categories'}"  attrs="{'invisible': [('import_option', '!=', 'collection')]}"/>
+                    
+                    <button type='object' string='Sync Customers' name='get_customers' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'customers')]}"/>
+
+                    <button type='object' string='Sync Suppliers' name='get_suppliers' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'suppliers')]}"/>
+
+                    <button type='object' string='Sync Purchase Orders' name='get_purchase_orders' class='oe_highlight' attrs="{'invisible': [('import_option', '!=', 'purchase_order')]}"/> -->
+                </header>
+                <sheet>
+                    <div class="oe_title oe_inline">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <separator string="Authentication Information"/>
+                    <group>
+                        <group>
+                            <field name="import_option" widget="radio"/>
+                            <field name="data_access_url" attrs="{'invisible': [('import_option', '=', 'collection')], 'required': [('import_option', '!=', 'collection')]}"/>
+                            <field name="order_date" attrs="{'invisible': [('import_option', '!=', 'collection')], 'required': [('import_option', '=', 'collection')]}"/>
+                            <field name='page' attrs="{'invisible': [('import_option', '!=', 'orders')]}"/>
+                            <!-- <field name='updated_after' attrs="{'invisible': [('import_option', '!=', 'orders')]}"/> -->
+                            <field name='from_date' attrs="{'invisible': [('import_option', '!=', 'orders')]}"/>
+                            <field name='to_date' attrs="{'invisible': [('import_option', '!=', 'orders')]}"/>
+                            
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Access Token" name="access_token">
+                            <field name="access_token" style='word-break: break-all;'/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_foodics_connector" model="ir.actions.act_window">
+        <field name="name">Foodics Connector</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">foodics.connector</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Main Menus -->
+    <menuitem id="foodics_connector_menu_root"
+            name="Foodics Connector"
+            web_icon="wt_foodic,static/description/foodics.png"
+            sequence="1"/>
+
+    <menuitem id="foodics_connector_menu"
+            name="Connector"
+            parent="wt_foodic.foodics_connector_menu_root"
+            action="action_foodics_connector"
+            sequence="1"/>
+</odoo>

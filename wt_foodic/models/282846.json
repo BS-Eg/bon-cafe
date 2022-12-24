@@ -1,0 +1,354 @@
+{
+  "data": [
+    {
+      "branch": {
+        "id": "91a0b8f9-17fa-4a8b-b04b-7d046b6b4a70",
+        "name": "Methods Specialty Coffee - Fanateer",
+        "name_localized": null,
+        "reference": "B02",
+        "type": 1,
+        "latitude": null,
+        "longitude": null,
+        "phone": null,
+        "opening_from": "05:00",
+        "opening_to": "02:00",
+        "inventory_end_of_day_time": "00:00",
+        "receipt_header": "الجبيل - الواجهة البحرية - حي الفناتير",
+        "receipt_footer": null,
+        "settings": [
+          
+        ],
+        "created_at": "2020-09-27 08:20:41",
+        "updated_at": "2022-02-16 04:25:10",
+        "deleted_at": null,
+        "receives_online_orders": true,
+        "accepts_reservations": false,
+        "reservation_duration": 30,
+        "reservation_times": null,
+        "address": null
+      },
+      "creator": {
+        "pin": "*****",
+        "is_owner": false,
+        "id": "937a3be0-5d67-471f-b922-e25e3097cc6e",
+        "name": "Ruba",
+        "number": null,
+        "email": null,
+        "phone": null,
+        "lang": "en",
+        "display_localized_names": false,
+        "email_verified": false,
+        "must_use_fingerprint": false,
+        "last_console_login_at": null,
+        "last_cashier_login_at": null,
+        "created_at": "2021-05-20 17:33:18",
+        "updated_at": "2021-09-01 09:42:38",
+        "deleted_at": null
+      },
+      "customer": {
+        "id": "92201444-3fa7-4c73-8b87-e6bc3d3ff9b5",
+        "name": "الجوهرة",
+        "dial_code": 966,
+        "phone": "508932220",
+        "email": null,
+        "gender": null,
+        "birth_date": null,
+        "is_blacklisted": false,
+        "is_house_account_enabled": false,
+        "house_account_limit": null,
+        "is_loyalty_enabled": false,
+        "order_count": 147,
+        "last_order_at": "2022-03-17 09:47:51",
+        "created_at": "2020-11-29 15:46:06",
+        "updated_at": "2022-03-17 10:20:15",
+        "deleted_at": null
+      },
+      "payments": [
+        
+      ],
+      "products": [
+        {
+          "product": {
+            "ingredients": [
+              
+            ],
+            "id": "9221db45-1cf0-4a20-9187-bc805b4de211",
+            "sku": "WT004",
+            "barcode": null,
+            "name": "Water AVA - 330 ML",
+            "name_localized": "مياه اڤا - 330 مل",
+            "description": null,
+            "description_localized": null,
+            "image": "https://foodics-console-production.s3.eu-west-1.amazonaws.com/images/945799_1629488215_94337a9f-e197-457a-aacc-2ed2c66c5886.jpg",
+            "is_active": true,
+            "is_stock_product": false,
+            "is_ready": true,
+            "pricing_method": 1,
+            "selling_method": 1,
+            "costing_method": 2,
+            "preparation_time": null,
+            "price": 3,
+            "cost": 0,
+            "calories": null,
+            "created_at": "2020-11-30 12:58:23",
+            "updated_at": "2022-02-17 13:02:53",
+            "deleted_at": null
+          },
+          "options": [
+            
+          ],
+          "taxes": [
+            
+          ],
+          "discount_type": null,
+          "quantity": 1,
+          "returned_quantity": 0,
+          "unit_price": 3,
+          "discount_amount": 0,
+          "total_price": 3,
+          "total_cost": 0,
+          "tax_exclusive_discount_amount": 0,
+          "tax_exclusive_unit_price": 2.6087,
+          "tax_exclusive_total_price": 2.6087,
+          "status": 5,
+          "is_ingredients_wasted": 0,
+          "delay_in_seconds": null,
+          "kitchen_notes": null,
+          "meta": {
+            "foodics": {
+              "uuid": "f949d43c-b1b4-4321-a732-44cb8ff7a15d"
+            }
+          },
+          "added_at": "2022-02-23 08:43:10",
+          "closed_at": "2022-02-23 08:43:37"
+        },
+        {
+          "product": {
+            "ingredients": [
+              
+            ],
+            "id": "_72558a59",
+            "sku": "CB-0006",
+            "barcode": null,
+            "name": "Pistachio Latte - Small",
+            "name_localized": "بستاشيو لاتيه - صغير",
+            "description": null,
+            "description_localized": null,
+            "image": "https://foodics-console-production.s3.eu-west-1.amazonaws.com/images/945799_1623349753_93a48e89-c9ae-4240-9718-ec7d4dc6fc7a.png",
+            "is_active": true,
+            "is_stock_product": false,
+            "is_ready": true,
+            "pricing_method": 1,
+            "selling_method": 1,
+            "costing_method": 1,
+            "preparation_time": 3,
+            "price": 23,
+            "cost": 13.04,
+            "calories": 0,
+            "created_at": "2019-06-10 17:57:59",
+            "updated_at": "2022-03-14 06:37:32",
+            "deleted_at": null
+          },
+          "options": [
+            
+          ],
+          "taxes": [
+            
+          ],
+          "discount_type": 4,
+          "quantity": 1,
+          "returned_quantity": 0,
+          "unit_price": 23,
+          "discount_amount": 23,
+          "total_price": 0,
+          "total_cost": 13.04,
+          "tax_exclusive_discount_amount": 20,
+          "tax_exclusive_unit_price": 20,
+          "tax_exclusive_total_price": 0,
+          "status": 5,
+          "is_ingredients_wasted": 0,
+          "delay_in_seconds": null,
+          "kitchen_notes": null,
+          "meta": {
+            "foodics": {
+              "uuid": "2c41a3f1-e331-41a9-8dd5-87f6be1b30ec",
+              "loyalty": {
+                "app_id": "915c6308-0812-432b-81c3-16309cdc7be4",
+                "reward_code": "PISL343"
+              }
+            }
+          },
+          "added_at": "2022-02-23 08:43:33",
+          "closed_at": "2022-02-23 08:44:09"
+        },
+        {
+          "product": {
+            "ingredients": [
+              
+            ],
+            "id": "91bf40bf-9861-489f-a32d-574acb36b0ab",
+            "sku": "DD-0003",
+            "barcode": null,
+            "name": "Iced Drip Coffee",
+            "name_localized": "قهوة مقطرة باردة",
+            "description": null,
+            "description_localized": null,
+            "image": "https://foodics-console-production.s3.eu-west-1.amazonaws.com/images/945799_1629465929_9432f5ca-e579-46fa-a07b-f85c074fac8e.png",
+            "is_active": true,
+            "is_stock_product": false,
+            "is_ready": true,
+            "pricing_method": 1,
+            "selling_method": 1,
+            "costing_method": 2,
+            "preparation_time": 5,
+            "price": 16,
+            "cost": 0,
+            "calories": 0,
+            "created_at": "2020-10-12 12:35:10",
+            "updated_at": "2022-03-13 06:28:41",
+            "deleted_at": null
+          },
+          "options": [
+            {
+              "modifier_option": {
+                "ingredients": [
+                  
+                ],
+                "id": "944ef0ea-e18e-4dab-84e0-f2a063ef7649",
+                "name": "Colombia - Mango",
+                "name_localized": "كولومبيا - مانجو",
+                "sku": "Be-008",
+                "is_active": true,
+                "costing_method": 2,
+                "price": 0,
+                "cost": null,
+                "calories": null,
+                "created_at": "2021-09-03 11:15:02",
+                "updated_at": "2022-03-17 09:04:05",
+                "deleted_at": null,
+                "index": 0
+              },
+              "quantity": 1,
+              "partition": 1,
+              "unit_price": 0,
+              "total_price": 0,
+              "total_cost": 0,
+              "tax_exclusive_unit_price": 0,
+              "tax_exclusive_total_price": 0,
+              "tax_exclusive_discount_amount": 0,
+              "added_at": "2022-02-23 08:44:04"
+            }
+          ],
+          "taxes": [
+            
+          ],
+          "discount_type": 4,
+          "quantity": 1,
+          "returned_quantity": 0,
+          "unit_price": 16,
+          "discount_amount": 16,
+          "total_price": 0,
+          "total_cost": 0.185,
+          "tax_exclusive_discount_amount": 13.91304,
+          "tax_exclusive_unit_price": 13.91304,
+          "tax_exclusive_total_price": 0,
+          "status": 3,
+          "is_ingredients_wasted": 0,
+          "delay_in_seconds": null,
+          "kitchen_notes": null,
+          "meta": {
+            "foodics": {
+              "uuid": "32ae20b7-8e10-4162-a661-a90345b3f057",
+              "loyalty": {
+                "app_id": "915c6308-0812-432b-81c3-16309cdc7be4",
+                "reward_code": "NBZW149"
+              }
+            }
+          },
+          "added_at": "2022-02-23 08:44:02",
+          "closed_at": "2022-02-23 08:44:11"
+        }
+      ],
+      "id": "09fac614-6c55-432b-94fd-fc23686ca3d8",
+      "app_id": "8f7884c0-9e14-4833-ba96-3221471e8709",
+      "promotion_id": null,
+      "discount_type": null,
+      "reference_x": null,
+      "number": 41,
+      "type": 2,
+      "source": 1,
+      "status": 4,
+      "delivery_status": 1,
+      "guests": 1,
+      "kitchen_notes": null,
+      "customer_notes": null,
+      "business_date": "2022-02-23",
+      "subtotal_price": 0,
+      "discount_amount": 0,
+      "rounding_amount": 0,
+      "total_price": 0,
+      "tax_exclusive_discount_amount": 0,
+      "delay_in_seconds": null,
+      "meta": {
+        "foodics": {
+          "device_id": "91a0b678-37f9-4ff2-b84a-0008baf639f6",
+          "receipt_qr": "ARxQZXJmZWN0IFBpY2sgVHJhZGluZyBDb21wYW55Ag8zMTA1NDE0NjIxMDAwMDMDEzIwMjItMDItMjMgMTE6NDQ6MTEFBDAuMDAEBDAuMDA=",
+          "products_kitchen": [
+            {
+              "uuid": "32ae20b7-8e10-4162-a661-a90345b3f057",
+              "kitchen_times": [
+                
+              ],
+              "kitchen_sent_at": "2022-02-23 08:44:13"
+            }
+          ],
+          "kitchen_received_at": "2022-02-23 08:44:13"
+        }
+      },
+      "opened_at": "2022-02-23 08:43:10",
+      "accepted_at": null,
+      "due_at": null,
+      "driver_assigned_at": null,
+      "dispatched_at": null,
+      "driver_collected_at": null,
+      "delivered_at": null,
+      "closed_at": "2022-02-23 08:44:11",
+      "created_at": "2022-02-23 08:43:32",
+      "updated_at": "2022-02-23 09:15:06",
+      "reference": 282846,
+      "check_number": 277775
+    }
+  ],
+  "links": {
+    "first": "https://api.foodics.com/v5/orders?page=1",
+    "last": "https://api.foodics.com/v5/orders?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "active": false
+      },
+      {
+        "url": "https://api.foodics.com/v5/orders?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": null,
+        "label": "Next &raquo;",
+        "active": false
+      }
+    ],
+    "path": "https://api.foodics.com/v5/orders",
+    "per_page": 50,
+    "to": 1,
+    "total": 1
+  }
+}

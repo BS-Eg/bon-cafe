@@ -44,7 +44,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     <group>
                         <group>
                             <field name="employee_id" attrs="{'readonly':[('state','!=','draft')]}" />
-                            <field name="loan_id" domain="[('employee_id','=',employee_id),('state','=','done')]"
+                            <field name="loan_id" domain="[('employee_id','=',employee_id),('state','in',['hr_approval', 'financial_approval'])]"
                             					  widget="selection" attrs="{'readonly':[('state','!=','draft')]}"/>
                             <field name="installment_id" domain="[('loan_id','=',loan_id),('is_paid','!=',True)]" 
                             					  widget="selection"  attrs="{'readonly':[('state','!=','draft')]}"/>

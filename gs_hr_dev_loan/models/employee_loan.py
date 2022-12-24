@@ -367,6 +367,7 @@ class employee_loan(models.Model):
 
     def cancel_loan(self):
         self.state = 'cancel'
+        self.move_id.state = 'cancel'
 
     def set_to_draft(self):
         self.state = 'draft'

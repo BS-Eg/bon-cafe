@@ -34,9 +34,6 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     <button name="dep_manager_reject_loan" states="request" string="Reject Request" class="btn-primary"
                             type="object" groups="gs_hr_dev_loan.group_department_manager"/>
 
-                    <button name="cancel_loan" states="request" string="Cancel" type="object"
-                            groups="base.group_user"/>
-
 
                     <button name="hr_manager_approval_loan" states="dep_approval" string="Confirm" class="btn-primary"
                             type="object" groups="hr.group_hr_manager"/>
@@ -74,6 +71,10 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                     <button name='send_loan_detail' states="done" string='Send Mail' class="btn-primary" type="object"
                             groups="hr.group_hr_user"/>
 
+                    <button name="cancel_loan" string="Cancel" type="object"
+                            groups="base.group_user"
+                            attrs="{'invisible':['|',('is_payment','=',True),('state','=','cancel')]}"
+                    />
 
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,request,dep_approval,hr_approval,done"/>
@@ -123,7 +124,7 @@ For Module Support : devintelle@gmail.com  or Skype : devintelle
                             <field name="user_id" readonly="1"/>
                             <field name="hr_manager_id" invisible="1"/>
                             <field name="is_close" invisible="1"/>
-                            <field name="move_id" invisible="1"/>
+                            <field name="move_id" invisible="0"/>
                         </group>
                     </group>
                     <group>
